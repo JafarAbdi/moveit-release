@@ -69,8 +69,8 @@ TEST(time_optimal_trajectory_generation, test1)
     double t = std::min(parameterized.getDuration(), sample * resample_dt);
     Eigen::VectorXd acceleration = parameterized.getAcceleration(t);
     ASSERT_EQ(acceleration.size(), 4);
-    for(std::size_t i = 0; i < 4; ++i)
-      EXPECT_NEAR(acceleration(i),0.0,100.0) << "Invalid acceleration at position " << sample_count;
+    for (std::size_t i = 0; i < 4; ++i)
+      EXPECT_NEAR(acceleration(i), 0.0, 100.0) << "Invalid acceleration at position " << sample_count;
   }
 
   EXPECT_TRUE(trajectory.isValid());
@@ -122,8 +122,8 @@ TEST(time_optimal_trajectory_generation, test2)
     double t = std::min(parameterized.getDuration(), sample * resample_dt);
     Eigen::VectorXd acceleration = parameterized.getAcceleration(t);
     ASSERT_EQ(acceleration.size(), 4);
-    for(std::size_t i = 0; i < 4; ++i)
-      EXPECT_NEAR(acceleration(i),0.0,100.0) << "Invalid acceleration at position " << sample_count;
+    for (std::size_t i = 0; i < 4; ++i)
+      EXPECT_NEAR(acceleration(i), 0.0, 100.0) << "Invalid acceleration at position " << sample_count;
   }
 
   EXPECT_TRUE(trajectory.isValid());
@@ -175,8 +175,8 @@ TEST(time_optimal_trajectory_generation, test3)
     double t = std::min(parameterized.getDuration(), sample * resample_dt);
     Eigen::VectorXd acceleration = parameterized.getAcceleration(t);
     ASSERT_EQ(acceleration.size(), 4);
-    for(std::size_t i = 0; i < 4; ++i)
-      EXPECT_NEAR(acceleration(i),0.0,100.0) << "Invalid acceleration at position " << sample_count;
+    for (std::size_t i = 0; i < 4; ++i)
+      EXPECT_NEAR(acceleration(i), 0.0, 100.0) << "Invalid acceleration at position " << sample_count;
   }
 
   EXPECT_TRUE(trajectory.isValid());
