@@ -19,13 +19,13 @@ find_package(catkin REQUIRED COMPONENTS
   tf2_eigen
   tf2_geometry_msgs
   tf2_ros
-  eigenpy
   roscpp
   actionlib
   rospy
   rosconsole
 )
 
+find_package(eigenpy REQUIRED)
 find_package(PythonInterp REQUIRED)
 find_package(PythonLibs "${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}" REQUIRED)
 
