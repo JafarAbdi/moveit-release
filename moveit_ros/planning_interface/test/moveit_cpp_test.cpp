@@ -114,7 +114,7 @@ TEST_F(MoveItCppTest, GetCurrentStateTest)
 // Test the name of the planning group used by PlanningComponent for the Panda robot
 TEST_F(MoveItCppTest, NameOfPlanningGroupTest)
 {
-  EXPECT_STREQ(planning_component_ptr->getName().c_str(), "panda_arm");
+  EXPECT_STREQ(planning_component_ptr->getPlanningGroupName().c_str(), "panda_arm");
 }
 
 // Test setting the start state of the plan to the current state of the robot
