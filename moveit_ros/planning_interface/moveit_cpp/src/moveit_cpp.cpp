@@ -142,9 +142,6 @@ bool MoveItCpp::loadPlanningSceneMonitor(const PlanningSceneMonitorOptions& opti
     ROS_ERROR_STREAM_NAMED(LOGNAME, "Planning scene not configured");
     return false;
   }
-  // TODO(henningkayser): fix and remove lines below
-  ros::spinOnce();
-  ros::Duration(0.5).sleep();  // when at 0.1, i believe sometimes vjoint not properly loaded
 
   // Wait for complete state to be recieved
   if (options.wait_for_initial_state_timeout > 0.0)
