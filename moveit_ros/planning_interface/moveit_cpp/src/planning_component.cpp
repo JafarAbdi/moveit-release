@@ -88,11 +88,7 @@ PlanningComponent::PlanningComponent(const std::string& group_name, const ros::N
 {
 }
 
-PlanningComponent::~PlanningComponent()
-{
-  ROS_INFO_NAMED(LOGNAME, "Deleting PlanningComponent '%s'", group_name_.c_str());
-  clearContents();
-}
+PlanningComponent::~PlanningComponent() = default;
 
 PlanningComponent& PlanningComponent::operator=(PlanningComponent&& other)
 {
@@ -160,6 +156,14 @@ PlanningComponent::PlanSolution PlanningComponent::plan(const PlanRequestParamet
   moveit::core::RobotStatePtr start_state = considered_start_state_;
   if (!start_state)
     start_state = moveit_cpp_->getCurrentState();
+  std::vector<double> vs;
+  start_state->copyJointGroupPositions("hand", vs);
+  for (const auto& v : vs)
+  {
+    std::cout << v << "\n";
+  }
+  // start_state->setToDefaultValues(moveit_cpp_->getRobotModel()->getJointModelGroup("hand"), "open");
+  start_state->update();
   moveit::core::robotStateToRobotStateMsg(*start_state, req.start_state);
   planning_scene->setCurrentState(*start_state);
 

@@ -1,4 +1,5 @@
 <launch>
+    <arg name="repeat_number" value="-1"/>
     <!-- Specify the config files to use -->
     <rosparam ns="moveit_cpp_test" command="load" file="$(find moveit_ros_planning_interface)/test/moveit_cpp.yaml" />
 
@@ -30,5 +31,5 @@
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
 
     <!-- Unit Test /-->
-    <test test-name="moveit_cpp_test" pkg="moveit_ros_planning_interface" type="moveit_cpp_test" />
+    <test test-name="moveit_cpp_test" pkg="moveit_ros_planning_interface" type="moveit_cpp_test" args="--gtest_repeat=$(arg repeat_number) --gtest_break_on_failure" time-limit="10000"/>
 </launch>

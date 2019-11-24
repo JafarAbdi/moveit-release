@@ -101,11 +101,7 @@ MoveItCpp::MoveItCpp(MoveItCpp&& other)
   other.clearContents();
 }
 
-MoveItCpp::~MoveItCpp()
-{
-  ROS_INFO_NAMED(LOGNAME, "Deleting MoveItCpp");
-  clearContents();
-}
+MoveItCpp::~MoveItCpp() = default;
 
 MoveItCpp& MoveItCpp::operator=(MoveItCpp&& other)
 {
@@ -214,8 +210,7 @@ const ros::NodeHandle& MoveItCpp::getNodeHandle() const
 
 bool MoveItCpp::getCurrentState(robot_state::RobotStatePtr& current_state, double wait_seconds)
 {
-  if (wait_seconds > 0.0 &&
-      !planning_scene_monitor_->getStateMonitor()->waitForCurrentState(ros::Time::now(), wait_seconds))
+  if (wait_seconds > 0.0 && !planning_scene_monitor_->getStateMonitor()->waitForCompleteState(wait_seconds))
   {
     ROS_ERROR_NAMED(LOGNAME, "Did not receive robot state");
     return false;
