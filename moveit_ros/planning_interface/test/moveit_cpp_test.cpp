@@ -78,6 +78,8 @@ public:
     target_pose2.position.x = 0.55;
     target_pose2.position.y = -0.05;
     target_pose2.position.z = 0.8;
+
+    ASSERT_TRUE(moveit_cpp_ptr->getPlanningSceneMonitor()->getStateMonitor()->waitForCompleteState(1.0));
   }
 
 protected:

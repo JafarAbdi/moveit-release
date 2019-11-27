@@ -319,8 +319,8 @@ const std::shared_ptr<tf2_ros::Buffer>& MoveItCpp::getTFBuffer() const
 void MoveItCpp::clearContents()
 {
   tf_buffer_.reset();
-  planning_scene_monitor_.reset();
   robot_model_.reset();
+  planning_scene_monitor_.reset();
   planning_pipelines_.clear();
 }
 }  // namespace planning_interface

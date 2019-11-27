@@ -161,6 +161,11 @@ PlanningComponent::PlanSolution PlanningComponent::plan(const PlanRequestParamet
   if (!start_state)
     start_state = moveit_cpp_->getCurrentState();
   moveit::core::robotStateToRobotStateMsg(*start_state, req.start_state);
+  start_state->update();
+  std::vector<double> joint_vals;
+  start_state->copyJointGroupPositions("panda_arm_hand", joint_vals);
+  for (double v : joint_vals)
+    std::cout << "Hi Jafar: " << v << "\n";
   planning_scene->setCurrentState(*start_state);
 
   // Set goal constraints
@@ -337,11 +342,11 @@ const PlanningComponent::PlanSolutionPtr PlanningComponent::getLastPlanSolution(
 
 void PlanningComponent::clearContents()
 {
-  considered_start_state_.reset();
-  last_plan_solution_.reset();
-  current_goal_constraints_.clear();
   moveit_cpp_.reset();
   planning_pipeline_names_.clear();
+  considered_start_state_.reset();
+  current_goal_constraints_.clear();
+  last_plan_solution_.reset();
 }
 }  // namespace planning_interface
 }  // namespace moveit
