@@ -88,11 +88,11 @@ PlanningComponent::PlanningComponent(const std::string& group_name, const ros::N
 {
 }
 
-PlanningComponent::~PlanningComponent()
-{
-  ROS_INFO_NAMED(LOGNAME, "Deleting PlanningComponent '%s'", group_name_.c_str());
-  clearContents();
-}
+// PlanningComponent::~PlanningComponent()
+// {
+//   ROS_INFO_NAMED(LOGNAME, "Deleting PlanningComponent '%s'", group_name_.c_str());
+//   clearContents();
+// }
 
 PlanningComponent& PlanningComponent::operator=(PlanningComponent&& other)
 {
