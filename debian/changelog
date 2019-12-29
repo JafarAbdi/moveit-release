@@ -1,0 +1,530 @@
+ros-melodic-moveit-planners-ompl (1.1.0-0bionic) bionic; urgency=high
+
+  * clear roadmap validity for LazyPRM/LazyPRMstar when using multi-query planning is enabled (#1802 <https://github.com/JafarAbdi/moveit/issues/1802>)
+    * clear roadmap validity for LazyPRM/LazyPRMstar when using multi-query planning is enabled
+    * add #if guard for OMPL version
+  * Add support for multi-query planning in OMPL (#1799 <https://github.com/JafarAbdi/moveit/issues/1799>)
+    If enabled, the internal state of of planners does not get cleared.
+    This can be enabled per planner. It only makes sense for roadmap-based
+    planners (or if the start state does not change). Additionally, for
+    PRM, PRM*, LazyPRM, and LazyPRM* it is possible (when using OMPL 1.5.0)
+    to load/save roadmaps from disk upon creation/destruction. This is
+    set in ompl_planning.yaml like so:
+    planner_configs:
+    PersistentPRM:
+    type: geometric::PRM
+    multi_query_planning_enabled: true
+    store_planner_data: true
+    load_planner_data: true
+    planner_data_path: /tmp/roadmap.graph
+    This commit also fixes a bug for PRM-family planners where they would
+    always run as optimizing planners and not terminate when the first
+    solution was found. This occurs when the default optimization objective
+    is set when none are specified. The fix is to not set an objective
+    when none are specified.
+    Co-Authored-By: Robert Haschke <rhaschke@users.noreply.github.com>
+  * Merge #1773 <https://github.com/JafarAbdi/moveit/issues/1773>: Fix compiler warnings
+  * fix unused parameter warnings
+  * Fix infinite recursive call to loadConstraintApproximations (#1768 <https://github.com/JafarAbdi/moveit/issues/1768>)
+    Fixup for #1428 <https://github.com/JafarAbdi/moveit/issues/1428>.
+  * Allow user to specify planner termination condition. (#1695 <https://github.com/JafarAbdi/moveit/issues/1695>)
+    * Add OMPL planner 'AnytimePathShortening'
+    * clean up registration of planner allocators
+    * add parameter to geometric::AnytimePathShortening method to set planner instances and their parameters via config file
+    * clang-format
+    * add support for specifying planner termination conditions via ompl_planning.yaml file
+    * add OMPL version check to make new feature backwards compatible with older versions of MoveIt
+    * fix catkin_lint warning
+    * fix compiler warning
+    * fix logical error (ROS_ERROR is not fatal)
+    * add docs for setting termination condition
+    * add note to remove #if guard for OMPL version once support for Melodic and older has been dropped
+    * correct/add TODOs for OMPL version checks
+  * Constraints Library Refactor (#1428 <https://github.com/JafarAbdi/moveit/issues/1428>)
+    * Moved constraints library internal to the ModelBasedPlanningContext
+    In preparation to a larger change that moves much of the context initialization
+    internal to the ModelBasedPlanningContext as well.
+    * Removed unused OMPLPlannerService.
+    * Fixed tests since ModelBasedStateSpace is now virtual
+    * Corrected switched comments
+    * Fixed compile issues, and got construct database to work.
+    Also added launch file for ease of use.
+    * Only install the generate state db script to CATKIN_PACKAGE_BIN_DEST
+  * Add OMPL planner 'AnytimePathShortening' (#1686 <https://github.com/JafarAbdi/moveit/issues/1686>)
+    * Add OMPL planner 'AnytimePathShortening'
+    * clean up registration of planner allocators
+    * add parameter to geometric::AnytimePathShortening method to set planner instances and their parameters via config file
+    * clang-format
+    * make anytime path planning backwards compatible
+  * Cleanup OMPL dynamic reconfigure config (#1649 <https://github.com/JafarAbdi/moveit/issues/1649>)
+    * reduce minimum number of waypoints in solution to 2
+    There is no real reason to specify 10 here by default.
+    So instead, allow for the bare minimum of waypoints if simple interpolation
+    from start to end succeeds and the maximum segment length suffices.
+    Fixes #19 <https://github.com/JafarAbdi/moveit/issues/19>.
+    * ompl dyn reconfig: clean wrongly specified levels
+    The levels are treated as bitmasks in the reconfigure callback,
+    so counting up in natural numbers does not serve any purpose.
+    The respective callback ignores the values either way,
+    so this change just simplifies reading the config.
+  * move isEmpty test functions to moveit_core/utils (#1627 <https://github.com/JafarAbdi/moveit/issues/1627>)
+  * Fix binary artifact install locations. (#1575 <https://github.com/JafarAbdi/moveit/issues/1575>)
+  * Switch from include guards to pragma once (#1615 <https://github.com/JafarAbdi/moveit/issues/1615>)
+  * Use CMAKE_CXX_STANDARD to enforce c++14 for portability (#1607 <https://github.com/JafarAbdi/moveit/issues/1607>)
+    * favor CMAKE_CXX_STANDARD to enforce c++14
+    * update all cmake_minimum_required usage
+  * Remove ! from MoveIt name (#1590 <https://github.com/JafarAbdi/moveit/issues/1590>)
+  * Clang tidy fix modernize-loop-convert to entire code base (#1419 <https://github.com/JafarAbdi/moveit/issues/1419>)
+  * remove obsolete moveit_resources/config.h (#1412 <https://github.com/JafarAbdi/moveit/issues/1412>)
+  * fixing the test utilities in moveit core (#1409 <https://github.com/JafarAbdi/moveit/issues/1409>)
+    * fixing the test utilities in moveit core
+    * replacing MOVEIT_TEST_RESOURCES_DIR with getPath(moveit_resources)
+  * Apply clang tidy fix to entire code base (Part 2) (#1394 <https://github.com/JafarAbdi/moveit/issues/1394>)
+    * Conform class name to CamelCase
+    * Conform member method name to camelBack
+    * Exceptions to method name
+    * Conform local variable name to lower_case part 1
+    * Conform local variable name to lower_case part 2
+    * Conform local variable name to lower_case part 3
+    * Conform local variable name to lower_case part 4
+    * Local static variable to lower_case
+    * Local variable manual fix
+    * Exceptions to local variable name
+    * Conform static const variable name to UPPER_CASE
+    * Conform global variable name to UPPER_CASE
+    * Conform static const member variable to UPPER_CASE
+    * clang-format
+    * Travis: mandatory clang-tidy-check
+    * Catch up most recent changes
+    * Update .clang-tidy
+    * fixup! Conform static const variable name to UPPER_CASE
+  * Contributors: Bryce Willey, Dave Coleman, Jonathan Binney, Mark Moll, Michael Görner, Mike Lautman, Robert Haschke, Sean Yen, Yu, Yan
+
+ -- Dave Coleman <dave@picknik.ai>  Sat, 28 Dec 2019 21:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (1.0.1-0bionic) bionic; urgency=high
+
+  * [improve] Apply clang tidy fix to entire code base (Part 1) (#1366 <https://github.com/ros-planning/moveit/issues/1366>)
+  * Contributors: Robert Haschke, Yu, Yan
+
+ -- Dave Coleman <dave@picknik.ai>  Thu, 07 Mar 2019 21:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (1.0.0-0bionic) bionic; urgency=high
+
+  * [fix] catkin_lint issues (#1341 <https://github.com/ros-planning/moveit/issues/1341>)
+  * Contributors: Dave Coleman, Robert Haschke
+
+ -- Dave Coleman <dave@picknik.ai>  Sat, 23 Feb 2019 21:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.10.8-0bionic) bionic; urgency=high
+
+
+
+ -- Dave Coleman <dave@picknik.ai>  Sun, 23 Dec 2018 21:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.10.7-0bionic) bionic; urgency=high
+
+
+
+ -- Dave Coleman <dave@picknik.ai>  Wed, 12 Dec 2018 21:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.10.6-0bionic) bionic; urgency=high
+
+  * [fix] Fixed memory leak in OMPL planner (#1104 <https://github.com/ros-planning/moveit/issues/1104>)
+    * Resolve circular reference to ompl::geometric::SimpleSetupPtr
+  * [maintenance] Use C++14 (#1146 <https://github.com/ros-planning/moveit/issues/1146>)
+  * [maintenance] Code Cleanup
+    * #1179 <https://github.com/ros-planning/moveit/issues/1179>
+    * #1196 <https://github.com/ros-planning/moveit/issues/1196>
+  * Contributors: Alex Moriarty, Dave Coleman, Robert Haschke
+
+ -- Dave Coleman <dave@picknik.ai>  Sat, 08 Dec 2018 21:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.10.5-0bionic) bionic; urgency=high
+
+  * [fix] Build regression (#1174 <https://github.com/ros-planning/moveit/issues/1174>)
+  * Contributors: Chris Lalancette
+
+ -- Dave Coleman <dave@picknik.ai>  Wed, 31 Oct 2018 21:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.10.4-0bionic) bionic; urgency=high
+
+
+
+ -- Dave Coleman <dave@picknik.ai>  Sun, 28 Oct 2018 21:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.10.3-0bionic) bionic; urgency=high
+
+  * [maintenance] Use locale independent conversion from double to string (#1099 <https://github.com/ros-planning/moveit/issues/1099>)
+  * Contributors: Simon Schmeisser
+
+ -- Dave Coleman <dave@picknik.ai>  Sun, 28 Oct 2018 21:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.10.2-0bionic) bionic; urgency=high
+
+  * [capability] adaptions for OMPL 1.4 (#903 <https://github.com/ros-planning/moveit/issues/903>)
+  * Contributors: Dave Coleman, Michael Görner, Mikael Arguedas, Mohmmad Ayman, Robert Haschke, mike lautman
+
+ -- Dave Coleman <dave@picknik.ai>  Tue, 23 Oct 2018 21:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.10.1-0bionic) bionic; urgency=high
+
+  * migration from tf to tf2 API (#830 <https://github.com/ros-planning/moveit/issues/830>)
+  * switch to ROS_LOGGER from CONSOLE_BRIDGE (#874 <https://github.com/ros-planning/moveit/issues/874>)
+  * Make trajectory interpolation in MoveIt consistent to OMPL (#869 <https://github.com/ros-planning/moveit/issues/869>)
+  * Contributors: Bryce Willey, Ian McMahon, Mikael Arguedas, Robert Haschke, Xiaojian Ma
+
+ -- Dave Coleman <dave@picknik.ai>  Thu, 24 May 2018 21:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.9.11-0bionic) bionic; urgency=high
+
+
+
+ -- Dave Coleman <dave@picknik.ai>  Sun, 24 Dec 2017 21:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.9.10-0bionic) bionic; urgency=high
+
+  * [maintenance][kinetic onward] Remove OutputHandlerROS from ompl_interface (#609 <https://github.com/ros-planning/moveit/issues/609>)
+  * Contributors: Bence Magyar
+
+ -- Dave Coleman <dave@picknik.ai>  Fri, 08 Dec 2017 21:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.9.9-0bionic) bionic; urgency=high
+
+  * [improve][moveit_planners_ompl] Optional forced use of JointModelStateSpaceFactory (#541 <https://github.com/ros-planning/moveit/issues/541>)
+  * Contributors: henhenhen
+
+ -- Dave Coleman <dave@picknik.ai>  Sat, 05 Aug 2017 21:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.9.8-0bionic) bionic; urgency=high
+
+
+
+ -- Dave Coleman <dave@picknik.ai>  Tue, 20 Jun 2017 21:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.9.7-0bionic) bionic; urgency=high
+
+
+
+ -- Dave Coleman <dave@picknik.ai>  Sun, 04 Jun 2017 21:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.9.6-0bionic) bionic; urgency=high
+
+  * Always update initial robot state to prevent dirty robot state error.
+  * Contributors: Henning Kayser
+
+ -- Dave Coleman <dave@picknik.ai>  Tue, 11 Apr 2017 21:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.9.5-0bionic) bionic; urgency=high
+
+  * [fix][moveit_ros_warehouse] gcc6 build error #423 <https://github.com/ros-planning/moveit/pull/423>
+  * Contributors: Dave Coleman
+
+ -- Dave Coleman <dave@picknik.ai>  Tue, 07 Mar 2017 21:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.9.4-0bionic) bionic; urgency=high
+
+  * [enhancement] ompl_interface: uniform & simplified handling of the default planner (#371 <https://github.com/ros-planning/moveit/issues/371>)
+  * [maintenance] clang-format upgraded to 3.8 (#367 <https://github.com/ros-planning/moveit/issues/367>)
+  * Contributors: Dave Coleman, Michael Goerner
+
+ -- Dave Coleman <dave@picknik.ai>  Sun, 05 Feb 2017 21:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.9.3-0bionic) bionic; urgency=high
+
+  * [capability] Exposed planners from latest ompl release. (#338 <https://github.com/ros-planning/moveit/issues/338>)
+  * [maintenance] Updated package.xml maintainers and author emails #330 <https://github.com/ros-planning/moveit/issues/330>
+  * Contributors: Dave Coleman, Ian McMahon, Ruben Burger
+
+ -- Dave Coleman <dave@picknik.ai>  Tue, 15 Nov 2016 21:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.9.2-0bionic) bionic; urgency=high
+
+
+
+ -- Dave Coleman <dave@picknik.ai>  Fri, 04 Nov 2016 21:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.7.0-0bionic) bionic; urgency=high
+
+  * Removed trailing whitespace from entire repository
+  * Fixed include directory order to make ros package shadowing work.
+  * fixing internal storing of config settings
+  * Make sure an overlayed OMPL is used instead of the ROS one.
+  * fix simplifySolutions(bool) setter
+    The method simplifySolutions(bool) always set the simplify_solutions member to true and the input variable "flag" was ignored.
+    The method is fixed by setting the simplify_solutions member to the value of the input variable "flag".
+  * changed location of getDefaultPlanner
+  * Contributors: Bastian Gaspers, Christian Dornhege, Dave Coleman, Dave Hershberger, Sachin Chitta
+
+ -- Dave Coleman <dave@picknik.ai>  Fri, 29 Jan 2016 22:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.6.7-0bionic) bionic; urgency=high
+
+  * Changed OMPL SimpleSetup member variable to shared pointer, passed MotionPlanningRequest to child function
+  * Simplified number of solve() entry points in moveit_planners_ompl
+  * Fixed uninitialized ``ptc_`` pointer causing a crash.
+  * renamed newGoal to new_goal for keeping with formatting
+  * setting GroupStateValidityCallbackFn member for constraint_sampler member and implementing callbacks for state validity checking
+  * added functions to check validit of state, and also to act as callback for constraint sampler
+  * Added copy function from MoveIt robot_state joint values to ompl state
+  * fix for demo constraints database linking error
+  * Namespaced less useful debug output to allow to be easily silenced using ros console
+  * Contributors: Dave Coleman, Dave Hershberger, Sachin Chitta, arjungm
+
+ -- Dave Coleman <dave@picknik.ai>  Mon, 27 Oct 2014 22:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.6.6-0bionic) bionic; urgency=high
+
+  * indigo version of moveit planners
+  * fix compile error on Indigo
+  * Fix for getMeasure() virtual function OMPL change
+  * Move OMPL paths before catkin to avoid compilation against ROS OMPL package when specifying a different OMPL installation
+  * Fixed bug which limited the number of plans considered to the number of threads.
+  * Contributors: Alexander Stumpf, Chris Lewis, Dave Coleman, Ryan Luna, Sachin Chitta
+
+ -- Dave Coleman <dave@picknik.ai>  Sat, 05 Jul 2014 21:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.5.5-0bionic) bionic; urgency=high
+
+  * update build system for ROS indigo
+  * Removed duplicate call to setPlanningScene(), added various comments
+  * Contributors: Dave Coleman, Ioan Sucan
+
+ -- Dave Coleman <dave@picknik.ai>  Fri, 21 Mar 2014 22:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.5.4-0bionic) bionic; urgency=high
+
+  * fix segfault when multiple goals are passed to move_group
+
+ -- Dave Coleman <dave@picknik.ai>  Wed, 05 Feb 2014 22:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.5.3-0bionic) bionic; urgency=high
+
+  * update to new API
+
+ -- Dave Coleman <dave@picknik.ai>  Thu, 10 Oct 2013 21:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.5.2-0bionic) bionic; urgency=high
+
+  * porting to new robot state
+
+ -- Dave Coleman <dave@picknik.ai>  Sun, 22 Sep 2013 21:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.5.1-0bionic) bionic; urgency=high
+
+  * make headers and author definitions aligned the same way; white space fixes
+  * namespace change for profiler
+
+ -- Dave Coleman <dave@picknik.ai>  Mon, 12 Aug 2013 21:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.5.0-0bionic) bionic; urgency=high
+
+
+
+ -- Dave Coleman <dave@picknik.ai>  Sun, 14 Jul 2013 21:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.4.2-0bionic) bionic; urgency=high
+
+  * white space fixes (tabs are now spaces)
+  * port ompl plugin to new base class for planning_interface (using planning contexts)
+
+ -- Dave Coleman <dave@picknik.ai>  Thu, 11 Jul 2013 21:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.4.1-0bionic) bionic; urgency=high
+
+  * use new location of RRTstar, add PRMstar
+  * Added new cost function that takes into account robot joint movements
+  * Added ability for parameter sweeping by allowing parameters to be changed in planning contexts
+  * Added ability to alter configs in a cache
+
+ -- Dave Coleman <dave@picknik.ai>  Wed, 03 Jul 2013 21:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.4.0-0bionic) bionic; urgency=high
+
+  * propagating changes from moveit_core
+
+ -- Dave Coleman <dave@picknik.ai>  Sun, 26 May 2013 21:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.3.11-0bionic) bionic; urgency=high
+
+  * remove some debug output and add some fixes
+  * some fixes for planning with constraint approximations
+  * more refactoring; what used to work (including using constraint approximations) works fine. explicitly storing motions is not yet done
+  * refactor constraints storage stuff
+  * display random motions in a slightly more robust way
+  * remove follow constraints API
+  * combine ompl_interface and ompl_interface_ros
+  * don't print status
+  * remove option for ordering constraint approximations (and fix #12 <https://github.com/ros-planning/moveit_planners/issues/12>)
+  * add test for jumping configs
+  * use project() instead of sample() for producing goals
+  * minor fixes and add demo database construction code
+  * switch to using the profiler in moveit and add one more debug tool
+
+ -- Dave Coleman <dave@picknik.ai>  Wed, 01 May 2013 21:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.3.10-0bionic) bionic; urgency=high
+
+  * Merge branch 'groovy-devel' of github.com:ros-planning/moveit_planners into groovy-devel
+  * remove incorrect dep
+  * add dynamic reconfigure options for #2 <https://github.com/ros-planning/moveit_planners/issues/2>
+
+ -- Dave Coleman <dave@picknik.ai>  Tue, 16 Apr 2013 21:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.3.9-0bionic) bionic; urgency=high
+
+  * disable old style benchmarking
+
+ -- Dave Coleman <dave@picknik.ai>  Tue, 16 Apr 2013 10:39:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.3.8-0bionic) bionic; urgency=high
+
+  * fix #8 <https://github.com/ros-planning/moveit_planners/issues/8>
+  * use namespace option in ompl plugin
+  * remove unused functions
+  * add buildtool depends
+  * Fixed state deserialization: now update var transform too
+  * collapse OMPL plugin to one package
+  * robustness fix
+  * Fixed github url name
+
+ -- Dave Coleman <dave@picknik.ai>  Tue, 16 Apr 2013 08:23:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.3.7-0bionic) bionic; urgency=high
+
+  * Remove configure from PlanningScene
+  * add multi-collision to PlanningScene
+  * renaming kinematic_model to robot_model
+
+ -- Dave Coleman <dave@picknik.ai>  Fri, 08 Mar 2013 22:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.3.6-0bionic) bionic; urgency=high
+
+  * complete renaming process
+  * rename KinematicState to RobotState, KinematicTrajectory to RobotTrajectory
+  * propagating fixes from moveit_core
+  * use new robot_trajectory lib
+
+ -- Dave Coleman <dave@picknik.ai>  Fri, 01 Feb 2013 22:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.3.5-0bionic) bionic; urgency=high
+
+  * fix reporting of goal collisions
+  * add some verbose output for failing goals
+  * port to new DisplayTrajectory message
+  * propagate API changes from planning_interface
+  * minor fix
+  * use the project() method to improve constraint following algorithm
+  * change default build flags
+
+ -- Dave Coleman <dave@picknik.ai>  Sun, 27 Jan 2013 22:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.3.4-0bionic) bionic; urgency=high
+
+  * dynamic_reconfigure workaroung
+
+ -- Dave Coleman <dave@picknik.ai>  Thu, 20 Dec 2012 21:59:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.3.3-0bionic) bionic; urgency=high
+
+  * update dyn reconfig call
+
+ -- Dave Coleman <dave@picknik.ai>  Thu, 20 Dec 2012 19:51:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.3.2-0bionic) bionic; urgency=high
+
+  * fix call to obsolete function
+
+ -- Dave Coleman <dave@picknik.ai>  Thu, 20 Dec 2012 11:45:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.3.1-0bionic) bionic; urgency=high
+
+  * using the constraint sampler loading library
+  * make sure sampled goals are valid
+  * fix buildtool tag
+
+ -- Dave Coleman <dave@picknik.ai>  Tue, 18 Dec 2012 22:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.3.0-0bionic) bionic; urgency=high
+
+  * add a debug msg
+  * re-enable heuristic
+  * first working version of follow planner
+  * most of the follow alg, but not 100% complete yet
+  * pass valid state samplers into the follow algorithm
+  * add constrained valid state sampler
+  * minor fixes
+  * fixes some catkin CMakeLists issues
+  * add code to allow execution of follow()
+  * port test to groovy
+  * placeholder for to-be-added algorithm
+  * minor touch-ups; no real functional changes other than a bias for state samplers wrt dimension of the space (when sampling in a ball of dimension D, focus the sampling towards the surface of the ball)
+  * minor & incomplete fix
+
+ -- Dave Coleman <dave@picknik.ai>  Sun, 09 Dec 2012 22:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.2.5-0bionic) bionic; urgency=high
+
+  * update to new message API
+
+ -- Dave Coleman <dave@picknik.ai>  Sun, 25 Nov 2012 22:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.2.4-0bionic) bionic; urgency=high
+
+  * improve error message
+  * stricter error checking
+  * update include path
+
+ -- Dave Coleman <dave@picknik.ai>  Thu, 22 Nov 2012 22:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.2.3-0bionic) bionic; urgency=high
+
+  * use generalized version of getMaximumExtent()
+
+ -- Dave Coleman <dave@picknik.ai>  Wed, 21 Nov 2012 20:47:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.2.2-0bionic) bionic; urgency=high
+
+  * more fixes to planners
+  * removed bad include dir
+  * fixed some plugin issues
+  * fixed include dirs in ompl ros interface
+  * added gitignore for ompl/ros
+
+ -- Dave Coleman <dave@picknik.ai>  Wed, 21 Nov 2012 20:41:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.2.1-0bionic) bionic; urgency=high
+
+  * update install location of include/
+
+ -- Dave Coleman <dave@picknik.ai>  Mon, 05 Nov 2012 22:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.2.0-0bionic) bionic; urgency=high
+
+  * udpate install targets
+
+ -- Dave Coleman <dave@picknik.ai>  Sun, 04 Nov 2012 22:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.1.2-0bionic) bionic; urgency=high
+
+  * bump version
+  * install the plugin lib as well
+  * add TRRT to the list of options
+
+ -- Dave Coleman <dave@picknik.ai>  Wed, 31 Oct 2012 22:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.1.1-0bionic) bionic; urgency=high
+
+  * fixes for build against groovy
+
+ -- Dave Coleman <dave@picknik.ai>  Sun, 28 Oct 2012 22:00:00 -0000
+
+ros-melodic-moveit-planners-ompl (0.1.0-0bionic) bionic; urgency=high
+
+  * port to groovy
+  * added some groovy build system files
+  * more moving around of packages
+
+ -- Dave Coleman <dave@picknik.ai>  Sat, 27 Oct 2012 21:00:00 -0000
+
+
