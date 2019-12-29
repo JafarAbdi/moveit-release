@@ -1,0 +1,12 @@
+Source: ros-melodic-moveit-jog-arm
+Section: misc
+Priority: optional
+Maintainer: Blake Anderson <blakeanderson@utexas.edu>
+Build-Depends: debhelper (>= 9.0.0), ros-melodic-catkin, ros-melodic-control-msgs, ros-melodic-geometry-msgs, ros-melodic-moveit-resources, ros-melodic-moveit-ros-planning-interface, ros-melodic-ros-pytest, ros-melodic-rosparam-shortcuts, ros-melodic-rostest
+Homepage: https://ros-planning.github.io/moveit_tutorials
+Standards-Version: 3.9.2
+
+Package: ros-melodic-moveit-jog-arm
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-melodic-control-msgs, ros-melodic-geometry-msgs, ros-melodic-joy-teleop, ros-melodic-moveit-ros-planning-interface, ros-melodic-rosparam-shortcuts
+Description: Provides real-time manipulator Cartesian jogging.
