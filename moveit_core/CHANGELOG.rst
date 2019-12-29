@@ -2,6 +2,147 @@
 Changelog for package moveit_core
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* deepcopy option for RobotTrajectory's copy constructor (`#1760 <https://github.com/JafarAbdi/moveit/issues/1760>`_)
+* Merge `#1781 <https://github.com/JafarAbdi/moveit/issues/1781>`_: Fix flaky moveit_cpp test
+* Handle incomplete group states
+  - issue a warning when building the robot model
+  - use a RobotState initialized to joint defaults for fake controllers
+* Fix totg bug giving invalid accelerations (`#1729 <https://github.com/JafarAbdi/moveit/issues/1729>`_)
+* Fix doc string OrientationConstraint (`#1793 <https://github.com/JafarAbdi/moveit/issues/1793>`_)
+  Implementation uses XYZ Euler angles (RPY), but documentation said ZXZ.
+* Enable code-coverage test (`#1776 <https://github.com/JafarAbdi/moveit/issues/1776>`_)
+* Merge `#1773 <https://github.com/JafarAbdi/moveit/issues/1773>`_: Fix compiler warnings
+* silent warnings outside MoveIt code base
+* fix unused parameter warnings
+* Cleanup `#1657 <https://github.com/JafarAbdi/moveit/issues/1657>`_: move ASSERT() into test setup (`#1777 <https://github.com/JafarAbdi/moveit/issues/1777>`_)
+* Provide UniquePtr macros (`#1771 <https://github.com/JafarAbdi/moveit/issues/1771>`_)
+* [trivial] Improve variable name in RobotModel (`#1752 <https://github.com/JafarAbdi/moveit/issues/1752>`_)
+* Updating deprecation method (`#1748 <https://github.com/JafarAbdi/moveit/issues/1748>`_)
+  * replaced MOVEIT_DEPRECATED with [[deprecated]]
+  * issuing a warning when including deprecation.h
+* Multi threaded collision checking test (`#1657 <https://github.com/JafarAbdi/moveit/issues/1657>`_)
+  * Multi threaded collision checking test
+  * PR review:
+  * Moved test into planning_scene
+  * Assert for each collision check
+  * Fixed includes
+  * Fixup
+* add missing dependencies to library (`#1746 <https://github.com/JafarAbdi/moveit/issues/1746>`_)
+  otherwise this can fail when building with moveit_msgs in one workspace.
+* Added missing licenses (`#1716 <https://github.com/JafarAbdi/moveit/issues/1716>`_) (`#1720 <https://github.com/JafarAbdi/moveit/issues/1720>`_)
+* Fix typo (`#1675 <https://github.com/JafarAbdi/moveit/issues/1675>`_)
+* Adding documentation to collision detection (`#1645 <https://github.com/JafarAbdi/moveit/issues/1645>`_)
+  * Collision detection documentation from `#1488 <https://github.com/JafarAbdi/moveit/issues/1488>`_
+  * Collision detection documentation from `#1505 <https://github.com/JafarAbdi/moveit/issues/1505>`_
+* Fix clang-tidy for unified collision environment (`#1638 <https://github.com/JafarAbdi/moveit/issues/1638>`_)
+* Unified Collision Environment Integration (`#1584 <https://github.com/JafarAbdi/moveit/issues/1584>`_)
+  * Unified collision environment
+  * Integrating FCL unified environment into the planning scene
+  * Distance field collision environment
+  * Collision distance field and hybrid compiles
+  * PR review:
+  * collision environmnet test cases adapted
+  * allocating of child planning scenes
+  * valided padding and scaling added
+  * reordering of member variables and functions
+  * license adaptions
+  * Unified all_valid collision detector
+  * Replace references to CollisionWorld / CollisionRobot to new CollisionEnv
+  * SBPL planner adapted for unified collision environment
+  * PR review:
+  * added as author
+  * added documentation to collision environments
+  * Added change description to migration notes.
+  * Replaced getCollisionWorld/Robot with getCollisionEnv functions
+  * PR review:
+  * change to pragma once include guards
+  * enable test
+* move isEmpty test functions to moveit_core/utils (`#1627 <https://github.com/JafarAbdi/moveit/issues/1627>`_)
+* PlanningRequestAdapter::initialize() = 0 (`#1621 <https://github.com/JafarAbdi/moveit/issues/1621>`_)
+  Implement initialize as pure virtual function.
+* remove GCC extension and alternative operator usage. (`#1583 <https://github.com/JafarAbdi/moveit/issues/1583>`_)
+  replace the gcc extension and alternative operator usage
+  Also guard use of Linux-specific abi header
+* Fix binary artifact install locations. (`#1575 <https://github.com/JafarAbdi/moveit/issues/1575>`_)
+* Switch from include guards to pragma once (`#1615 <https://github.com/JafarAbdi/moveit/issues/1615>`_)
+* Use CMAKE_CXX_STANDARD to enforce c++14 for portability (`#1607 <https://github.com/JafarAbdi/moveit/issues/1607>`_)
+  * favor CMAKE_CXX_STANDARD to enforce c++14
+  * update all cmake_minimum_required usage
+* Document discretization behavior in KinematicsBase (`#1602 <https://github.com/JafarAbdi/moveit/issues/1602>`_)
+* Rename lm to link_model (`#1592 <https://github.com/JafarAbdi/moveit/issues/1592>`_)
+* Remove ! from MoveIt name (`#1590 <https://github.com/JafarAbdi/moveit/issues/1590>`_)
+* add RobotTrajectory::getDuration() (`#1554 <https://github.com/JafarAbdi/moveit/issues/1554>`_)
+* fix World::getTransform (`#1553 <https://github.com/JafarAbdi/moveit/issues/1553>`_)
+  ... which was broken in 3e8feeb637 (`#1439 <https://github.com/JafarAbdi/moveit/issues/1439>`_)
+* link moveit_robot_model from moveit_test_utils (`#1534 <https://github.com/JafarAbdi/moveit/issues/1534>`_)
+  The library internally creates RobotModel objects
+  and needs to link the constructor.
+* Allow ROS namespaces for planning request adapters (`#1530 <https://github.com/JafarAbdi/moveit/issues/1530>`_)
+  To allow instantiation of different planning pipeline configurations from different ROS parameter namespaces, pass a NodeHandle to a new initialize() function of PlanningRequestAdapters.
+* Merge `#1439 <https://github.com/JafarAbdi/moveit/issues/1439>`_: Add named frames to CollisionObjects
+* clang-tidy
+* PlanningAdapter to resolve constraint frames
+* Add subframes to CollisionObject parsing
+  In PlanningScene and collisions.cpp
+* Streamline getFrameTransform, add getFrameInfo to RobotState
+  The getFrameInfo function is needed later for validateConstraintFrames. The getFrameTransform functions with "frame_found" parameter allow skipping the redundant searches in the planning_scene that are also part of this commit.
+* Add subframes to RobotState and AttachedBody
+* Add subframes to collision world
+* update robot state transforms when initializing a planning scene (`#1474 <https://github.com/JafarAbdi/moveit/issues/1474>`_)
+* Clean up processCollisionObject method in planning_scene
+* fix segfault when detaching attached collision object (`#1438 <https://github.com/JafarAbdi/moveit/issues/1438>`_)
+* More verbose "id" argument in PlanningScene, RobotState & CollisionWorld functions (`#1450 <https://github.com/JafarAbdi/moveit/issues/1450>`_)
+* Normalize quaternions when adding new or moving collision objects (`#1420 <https://github.com/JafarAbdi/moveit/issues/1420>`_)
+* Minor bug fixes in (collision) distance field (`#1392 <https://github.com/JafarAbdi/moveit/issues/1392>`_)
+  * Update collision_world_distance_field.h
+  deleted  void generateEnvironmentDistanceField(bool redo = true);
+  No source exists.
+  * Update voxel_grid.h
+  fixed worldtogrid and gridtoworld world input vectors to doubles as required.
+  * Update collision_robot_hybrid.h
+  replaced hardcoded defaults
+  * Update collision_world_hybrid.h
+  replaced hardcoded defaults with variables from robot_distance_field.
+  * apply clang-format
+* Clang tidy fix `modernize-loop-convert` to entire code base (`#1419 <https://github.com/JafarAbdi/moveit/issues/1419>`_)
+* separate source file for CartesianInterpolator (`#1149 <https://github.com/JafarAbdi/moveit/issues/1149>`_)
+* remove obsolete moveit_resources/config.h (`#1412 <https://github.com/JafarAbdi/moveit/issues/1412>`_)
+* remove MessageFilter for /collision_object messages (`#1406 <https://github.com/JafarAbdi/moveit/issues/1406>`_)
+  MessageFilter simply caches messages if the pose cannot be transformed to the planning frame.
+  As the cache is never cleaned (except if new messages arrive, which is usually not the case for
+  CollisionObject messages), objects with invalid frames were silently ignored.
+* fixing the test utilities in moveit core (`#1409 <https://github.com/JafarAbdi/moveit/issues/1409>`_)
+  * fixing the test utilities in moveit core
+  * replacing MOVEIT_TEST_RESOURCES_DIR with getPath(moveit_resources)
+* New isValidVelocityMove() for checking time between two waypoints given velocity (`#684 <https://github.com/JafarAbdi/moveit/issues/684>`_)
+  * New isValidVelocityMove() for checking time between two waypoints given velocity
+  * Move isValidVelocityMove() to JointModelGroup
+  * Update moveit_core/robot_model/src/joint_model_group.cpp
+* Apply clang tidy fix to entire code base (Part 2) (`#1394 <https://github.com/JafarAbdi/moveit/issues/1394>`_)
+  * Conform class name to `CamelCase`
+  * Conform member method name to `camelBack`
+  * Exceptions to method name
+  * Conform local variable name to `lower_case` part 1
+  * Conform local variable name to `lower_case` part 2
+  * Conform local variable name to `lower_case` part 3
+  * Conform local variable name to `lower_case` part 4
+  * Local static variable to `lower_case`
+  * Local variable manual fix
+  * Exceptions to local variable name
+  * Conform static const variable name to `UPPER_CASE`
+  * Conform global variable name to `UPPER_CASE`
+  * Conform static const member variable to `UPPER_CASE`
+  * clang-format
+  * Travis: mandatory clang-tidy-check
+  * Catch up most recent changes
+  * Update .clang-tidy
+  * fixup! Conform static const variable name to `UPPER_CASE`
+* test_utils: Fixed paths to urdf / srdf files (`#1391 <https://github.com/JafarAbdi/moveit/issues/1391>`_)
+  PR2 robot requires a different path then Fanuc and Panda.
+* Contributors: Bryce Willey, Dave Coleman, Felix von Drigalski, Henning Kayser, Jafar Abdi, Jens P, Jeroen, Jonathan Binney, Michael Görner, Mike Lautman, Niklas Fiedler, Robert Haschke, Sean Yen, Shivang Patel, Yu, Yan, tsijs
+
 1.0.1 (2019-03-08)
 ------------------
 * [capability] Graphically print current robot joint states with joint limits (`#1358 <https://github.com/ros-planning/moveit/issues/1358>`_)

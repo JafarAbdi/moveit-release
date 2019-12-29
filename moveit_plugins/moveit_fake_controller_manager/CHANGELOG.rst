@@ -2,6 +2,41 @@
 Changelog for package moveit_fake_controller_manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge `#1781 <https://github.com/JafarAbdi/moveit/issues/1781>`_: Fix flaky moveit_cpp test
+* Handle incomplete group states
+  - issue a warning when building the robot model
+  - use a RobotState initialized to joint defaults for fake controllers
+* Merge `#1773 <https://github.com/JafarAbdi/moveit/issues/1773>`_: Fix compiler warnings
+* fix unused parameter warnings
+* Fix binary artifact install locations. (`#1575 <https://github.com/JafarAbdi/moveit/issues/1575>`_)
+* Use CMAKE_CXX_STANDARD to enforce c++14 for portability (`#1607 <https://github.com/JafarAbdi/moveit/issues/1607>`_)
+  * favor CMAKE_CXX_STANDARD to enforce c++14
+  * update all cmake_minimum_required usage
+* Remove ! from MoveIt name (`#1590 <https://github.com/JafarAbdi/moveit/issues/1590>`_)
+* Clang tidy fix `modernize-loop-convert` to entire code base (`#1419 <https://github.com/JafarAbdi/moveit/issues/1419>`_)
+* Apply clang tidy fix to entire code base (Part 2) (`#1394 <https://github.com/JafarAbdi/moveit/issues/1394>`_)
+  * Conform class name to `CamelCase`
+  * Conform member method name to `camelBack`
+  * Exceptions to method name
+  * Conform local variable name to `lower_case` part 1
+  * Conform local variable name to `lower_case` part 2
+  * Conform local variable name to `lower_case` part 3
+  * Conform local variable name to `lower_case` part 4
+  * Local static variable to `lower_case`
+  * Local variable manual fix
+  * Exceptions to local variable name
+  * Conform static const variable name to `UPPER_CASE`
+  * Conform global variable name to `UPPER_CASE`
+  * Conform static const member variable to `UPPER_CASE`
+  * clang-format
+  * Travis: mandatory clang-tidy-check
+  * Catch up most recent changes
+  * Update .clang-tidy
+  * fixup! Conform static const variable name to `UPPER_CASE`
+* Contributors: Dave Coleman, Robert Haschke, Sean Yen, Yu, Yan
+
 1.0.1 (2019-03-08)
 ------------------
 * [improve] Apply clang tidy fix to entire code base (Part 1) (`#1366 <https://github.com/ros-planning/moveit/issues/1366>`_)

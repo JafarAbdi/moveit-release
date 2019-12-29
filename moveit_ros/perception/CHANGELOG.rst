@@ -2,6 +2,54 @@
 Changelog for package moveit_ros_perception
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge `#1773 <https://github.com/JafarAbdi/moveit/issues/1773>`_: Fix compiler warnings
+* silent warnings outside MoveIt code base
+* fix unused parameter warnings
+* Allow subclassing of point_containment_filter::ShapeMask. (`#1457 <https://github.com/JafarAbdi/moveit/issues/1457>`_)
+* depth_image_octomap_updater: reset depth transfer function to standard values (`#1661 <https://github.com/JafarAbdi/moveit/issues/1661>`_)
+  Use attribute stack to keep track of GL_DEPTH_SCALE and GL_DEPTH_BIAS
+* depth_image_octomap_updater: correctly set properties of debug images (`#1652 <https://github.com/JafarAbdi/moveit/issues/1652>`_) (`#1653 <https://github.com/JafarAbdi/moveit/issues/1653>`_)
+  * calculate step width independent from input depth image
+  * Also set endianness based on the host system, as the data stems from local computation.
+  * depth updater: streamline Image properties
+  * depth updater: enhance readability for filtered image generation
+* [windows] some more header inclusion and MSVC build error fixes. (`#1636 <https://github.com/JafarAbdi/moveit/issues/1636>`_)
+  * Fix header inclusion for Windows build.
+  * replace random() with c++11 <random> usage.
+* Fix binary artifact install locations. (`#1575 <https://github.com/JafarAbdi/moveit/issues/1575>`_)
+* Switch from include guards to pragma once (`#1615 <https://github.com/JafarAbdi/moveit/issues/1615>`_)
+* Use CMAKE_CXX_STANDARD to enforce c++14 for portability (`#1607 <https://github.com/JafarAbdi/moveit/issues/1607>`_)
+  * favor CMAKE_CXX_STANDARD to enforce c++14
+  * update all cmake_minimum_required usage
+* Remove ! from MoveIt name (`#1590 <https://github.com/JafarAbdi/moveit/issues/1590>`_)
+* move occupancy_map_monitor into its own package (`#1533 <https://github.com/JafarAbdi/moveit/issues/1533>`_)
+  Factor out occupancy_map_monitor into a new package moveit_ros_occupancy_map
+  to break the dependency of ros_planning on ros_perception.
+* Clang tidy fix `modernize-loop-convert` to entire code base (`#1419 <https://github.com/JafarAbdi/moveit/issues/1419>`_)
+* Removed unnecessary null pointer checks on deletion (`#1410 <https://github.com/JafarAbdi/moveit/issues/1410>`_)
+* Apply clang tidy fix to entire code base (Part 2) (`#1394 <https://github.com/JafarAbdi/moveit/issues/1394>`_)
+  * Conform class name to `CamelCase`
+  * Conform member method name to `camelBack`
+  * Exceptions to method name
+  * Conform local variable name to `lower_case` part 1
+  * Conform local variable name to `lower_case` part 2
+  * Conform local variable name to `lower_case` part 3
+  * Conform local variable name to `lower_case` part 4
+  * Local static variable to `lower_case`
+  * Local variable manual fix
+  * Exceptions to local variable name
+  * Conform static const variable name to `UPPER_CASE`
+  * Conform global variable name to `UPPER_CASE`
+  * Conform static const member variable to `UPPER_CASE`
+  * clang-format
+  * Travis: mandatory clang-tidy-check
+  * Catch up most recent changes
+  * Update .clang-tidy
+  * fixup! Conform static const variable name to `UPPER_CASE`
+* Contributors: Dave Coleman, Jonathan Binney, Mahmoud Ahmed Selim, Martin Pecka, Matthias Nieuwenhuisen, Michael Görner, Robert Haschke, Sean Yen, Yu, Yan, jschleicher
+
 1.0.1 (2019-03-08)
 ------------------
 * [improve] Apply clang tidy fix to entire code base (Part 1) (`#1366 <https://github.com/ros-planning/moveit/issues/1366>`_)

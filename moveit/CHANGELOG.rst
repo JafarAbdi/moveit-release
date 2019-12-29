@@ -2,6 +2,16 @@
 Changelog for package moveit
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Use standard cmake text for metapackages (`#1620 <https://github.com/JafarAbdi/moveit/issues/1620>`_)
+* Use CMAKE_CXX_STANDARD to enforce c++14 for portability (`#1607 <https://github.com/JafarAbdi/moveit/issues/1607>`_)
+  * favor CMAKE_CXX_STANDARD to enforce c++14
+  * update all cmake_minimum_required usage
+* README: Remove ROS Indigo badges, Add FOSS badge (`#1588 <https://github.com/JafarAbdi/moveit/issues/1588>`_)
+* Remove ! from MoveIt name (`#1590 <https://github.com/JafarAbdi/moveit/issues/1590>`_)
+* Contributors: Dave Coleman, Jonathan Binney, Sean Yen
+
 1.0.1 (2019-03-08)
 ------------------
 * [fix] segfault in chomp adapter (`#1377 <https://github.com/ros-planning/moveit/issues/1377>`_)

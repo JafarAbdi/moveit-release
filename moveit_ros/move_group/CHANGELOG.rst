@@ -2,6 +2,49 @@
 Changelog for package moveit_ros_move_group
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* TfPublisher: fixup and add attached collsion objects (`#1792 <https://github.com/JafarAbdi/moveit/issues/1792>`_)
+  * fixed transform timestamp
+  * The move_group TfPublisher capability now also publishes attached collision objects and their subframes to the tf system
+* move_group capability for publishing planning scene frames to the tf system (`#1761 <https://github.com/JafarAbdi/moveit/issues/1761>`_)
+  Added a move_group capability, which publishes the frames of planning scene objects to the tf system.
+* Merge `#1773 <https://github.com/JafarAbdi/moveit/issues/1773>`_: Fix compiler warnings
+* fix unused parameter warnings
+* move isEmpty test functions to moveit_core/utils (`#1627 <https://github.com/JafarAbdi/moveit/issues/1627>`_)
+* Fix binary artifact install locations. (`#1575 <https://github.com/JafarAbdi/moveit/issues/1575>`_)
+* Switch from include guards to pragma once (`#1615 <https://github.com/JafarAbdi/moveit/issues/1615>`_)
+* Use CMAKE_CXX_STANDARD to enforce c++14 for portability (`#1607 <https://github.com/JafarAbdi/moveit/issues/1607>`_)
+  * favor CMAKE_CXX_STANDARD to enforce c++14
+  * update all cmake_minimum_required usage
+* Remove ! from MoveIt name (`#1590 <https://github.com/JafarAbdi/moveit/issues/1590>`_)
+* Cleanup move_group capabilities (`#1515 <https://github.com/JafarAbdi/moveit/issues/1515>`_)
+  - use namespace definition to reduce verboseness of individual method signatures
+  - use capability name for ROS console messages
+* get_planning_scene_service: return full scene when nothing was requested (`#1424 <https://github.com/JafarAbdi/moveit/issues/1424>`_)
+* Clang tidy fix `modernize-loop-convert` to entire code base (`#1419 <https://github.com/JafarAbdi/moveit/issues/1419>`_)
+* separate source file for CartesianInterpolator (`#1149 <https://github.com/JafarAbdi/moveit/issues/1149>`_)
+* Apply clang tidy fix to entire code base (Part 2) (`#1394 <https://github.com/JafarAbdi/moveit/issues/1394>`_)
+  * Conform class name to `CamelCase`
+  * Conform member method name to `camelBack`
+  * Exceptions to method name
+  * Conform local variable name to `lower_case` part 1
+  * Conform local variable name to `lower_case` part 2
+  * Conform local variable name to `lower_case` part 3
+  * Conform local variable name to `lower_case` part 4
+  * Local static variable to `lower_case`
+  * Local variable manual fix
+  * Exceptions to local variable name
+  * Conform static const variable name to `UPPER_CASE`
+  * Conform global variable name to `UPPER_CASE`
+  * Conform static const member variable to `UPPER_CASE`
+  * clang-format
+  * Travis: mandatory clang-tidy-check
+  * Catch up most recent changes
+  * Update .clang-tidy
+  * fixup! Conform static const variable name to `UPPER_CASE`
+* Contributors: Dave Coleman, Jens P, JonasTietz, Jonathan Binney, Michael Görner, Mike Lautman, Robert Haschke, Sean Yen, Yu, Yan
+
 1.0.1 (2019-03-08)
 ------------------
 * [improve] Apply clang tidy fix to entire code base (Part 1) (`#1366 <https://github.com/ros-planning/moveit/issues/1366>`_)

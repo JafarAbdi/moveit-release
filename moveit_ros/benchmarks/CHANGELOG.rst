@@ -2,6 +2,68 @@
 Changelog for package moveit_ros_benchmarks
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge `#1773 <https://github.com/JafarAbdi/moveit/issues/1773>`_: Fix compiler warnings
+* silent warnings outside MoveIt code base
+* fix unused parameter warnings
+* Do not install helper scripts in global bin destination (`#1704 <https://github.com/JafarAbdi/moveit/issues/1704>`_)
+* Fix plot details, correcting xlabels positions and cleaning the graph (`#1658 <https://github.com/JafarAbdi/moveit/issues/1658>`_) (`#1668 <https://github.com/JafarAbdi/moveit/issues/1668>`_)
+* [windows] some more header inclusion and MSVC build error fixes. (`#1636 <https://github.com/JafarAbdi/moveit/issues/1636>`_)
+  * Fix header inclusion for Windows build.
+  * replace random() with c++11 <random> usage.
+* fix clang-format
+* Fix clang-tidy issues
+  in merge commit 180e2b56db095cb659dc95c7ccfaa8aeea546371
+* Merge feature branch 'benchmark-improvements'
+* Cleanup launch + config files (`#1631 <https://github.com/JafarAbdi/moveit/issues/1631>`_)
+* Benchmark combinations of predefined poses (`#1548 <https://github.com/JafarAbdi/moveit/issues/1548>`_)
+  The CombinePredefinedPosesBenchmark allows conveniently planning trajectories between all
+  pair-wise combinations of predefined poses that are specified in the benchmark config.
+* Support benchmarking of full planning pipelines (`#1531 <https://github.com/JafarAbdi/moveit/issues/1531>`_)
+  ... instead of planning plugins only
+* Fix binary artifact install locations. (`#1575 <https://github.com/JafarAbdi/moveit/issues/1575>`_)
+* Switch from include guards to pragma once (`#1615 <https://github.com/JafarAbdi/moveit/issues/1615>`_)
+* Use CMAKE_CXX_STANDARD to enforce c++14 for portability (`#1607 <https://github.com/JafarAbdi/moveit/issues/1607>`_)
+  * favor CMAKE_CXX_STANDARD to enforce c++14
+  * update all cmake_minimum_required usage
+* Remove ! from MoveIt name (`#1590 <https://github.com/JafarAbdi/moveit/issues/1590>`_)
+* MoveIt benchmark improvements (`#1510 <https://github.com/JafarAbdi/moveit/issues/1510>`_)
+  * Add pseudo experiment all_experiments to allow comparing all entries
+  * Expose loadBenchmarkQueryData() for setting up custom queries
+  * Add benchmark entry for comparing the 'final' result trajectory
+  Different planners don't always use the same description pattern in
+  their MotionPlanDetailedResponse. This makes it difficult to compare
+  benchmark results. This adds an extra field where all values of the
+  last solution trajectory are stored.
+  * Add trajectory similarity function to measure repeatability
+  * Address requested changes
+  * Fill empty fields in all_experiments
+  * Improve variable and function names
+  * Add helper function computeTrajectoryDistance()
+* Clang tidy fix `modernize-loop-convert` to entire code base (`#1419 <https://github.com/JafarAbdi/moveit/issues/1419>`_)
+* Removed unnecessary null pointer checks on deletion (`#1410 <https://github.com/JafarAbdi/moveit/issues/1410>`_)
+* Apply clang tidy fix to entire code base (Part 2) (`#1394 <https://github.com/JafarAbdi/moveit/issues/1394>`_)
+  * Conform class name to `CamelCase`
+  * Conform member method name to `camelBack`
+  * Exceptions to method name
+  * Conform local variable name to `lower_case` part 1
+  * Conform local variable name to `lower_case` part 2
+  * Conform local variable name to `lower_case` part 3
+  * Conform local variable name to `lower_case` part 4
+  * Local static variable to `lower_case`
+  * Local variable manual fix
+  * Exceptions to local variable name
+  * Conform static const variable name to `UPPER_CASE`
+  * Conform global variable name to `UPPER_CASE`
+  * Conform static const member variable to `UPPER_CASE`
+  * clang-format
+  * Travis: mandatory clang-tidy-check
+  * Catch up most recent changes
+  * Update .clang-tidy
+  * fixup! Conform static const variable name to `UPPER_CASE`
+* Contributors: Dave Coleman, Henning Kayser, Jonathan Binney, Mahmoud Ahmed Selim, Michael Görner, Robert Haschke, Sean Yen, Yu, Yan
+
 1.0.1 (2019-03-08)
 ------------------
 * [improve] Apply clang tidy fix to entire code base (Part 1) (`#1366 <https://github.com/ros-planning/moveit/issues/1366>`_)

@@ -2,6 +2,15 @@
 Changelog for package moveit_ros
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Use standard cmake text for metapackages (`#1620 <https://github.com/JafarAbdi/moveit/issues/1620>`_)
+* Use CMAKE_CXX_STANDARD to enforce c++14 for portability (`#1607 <https://github.com/JafarAbdi/moveit/issues/1607>`_)
+  * favor CMAKE_CXX_STANDARD to enforce c++14
+  * update all cmake_minimum_required usage
+* Remove ! from MoveIt name (`#1590 <https://github.com/JafarAbdi/moveit/issues/1590>`_)
+* Contributors: Dave Coleman, Jonathan Binney, Sean Yen
+
 1.0.1 (2019-03-08)
 ------------------
 

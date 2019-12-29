@@ -2,6 +2,177 @@
 Changelog for package moveit_setup_assistant
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fix Rviz argument in demo_gazebo.launch (`#1797 <https://github.com/JafarAbdi/moveit/issues/1797>`_)
+  * rename config -> rviz_config
+  * replace boolean value with file location
+  (as in demo.launch)
+* Merge `#1773 <https://github.com/JafarAbdi/moveit/issues/1773>`_: Fix compiler warnings
+* silent warnings outside MoveIt code base
+* fix unused parameter warnings
+* Allow user to specify planner termination condition. (`#1695 <https://github.com/JafarAbdi/moveit/issues/1695>`_)
+  * Add OMPL planner 'AnytimePathShortening'
+  * clean up registration of planner allocators
+  * add parameter to geometric::AnytimePathShortening method to set planner instances and their parameters via config file
+  * clang-format
+  * add support for specifying planner termination conditions via ompl_planning.yaml file
+  * add OMPL version check to make new feature backwards compatible with older versions of MoveIt
+  * fix catkin_lint warning
+  * fix compiler warning
+  * fix logical error (ROS_ERROR is not fatal)
+  * add docs for setting termination condition
+  * add note to remove #if guard for OMPL version once support for Melodic and older has been dropped
+  * correct/add TODOs for OMPL version checks
+* Fixup `#1625 <https://github.com/JafarAbdi/moveit/issues/1625>`_: MSA needs to explicitly call setVisible(true) (`#1738 <https://github.com/JafarAbdi/moveit/issues/1738>`_)
+  ... to actually show the robot of the RobotStateDisplay (which is hidden initially since `#1625 <https://github.com/JafarAbdi/moveit/issues/1625>`_).
+  Fixes b0f01b2dc79f99f5650933834c8e50905bdbe168.
+* Add OMPL planner 'AnytimePathShortening' (`#1686 <https://github.com/JafarAbdi/moveit/issues/1686>`_)
+  * Add OMPL planner 'AnytimePathShortening'
+  * clean up registration of planner allocators
+  * add parameter to geometric::AnytimePathShortening method to set planner instances and their parameters via config file
+  * clang-format
+  * make anytime path planning backwards compatible
+* [windows] some more header inclusion and MSVC build error fixes. (`#1636 <https://github.com/JafarAbdi/moveit/issues/1636>`_)
+  * Fix header inclusion for Windows build.
+  * replace random() with c++11 <random> usage.
+* favor ros::Duration.sleep over sleep. (`#1634 <https://github.com/JafarAbdi/moveit/issues/1634>`_)
+* MVP TrajOpt Planner Plugin (`#1593 <https://github.com/JafarAbdi/moveit/issues/1593>`_)
+  * added solve from tesseract.
+  added launch file
+  improved test_trajopt node
+  edited package.xml
+  * TrajOpt Planner (Empty Template) (`#1478 <https://github.com/JafarAbdi/moveit/issues/1478>`_)
+  * Created EmptyPlan, a MoveIt planning plugin template
+  * added trajopt from example_planner
+  * fixed trajopt_planner_mannager
+  * modified emaptyplan_planner_manager.cpp
+  * applied Dave's modifications
+  * The rest of the modifications from Dave's comments
+  * removed moveit_ros_planning dependency from package.xml
+  * fixed clangformat error and dependency issu
+  * added include directory
+  * edited package.xml
+  * added include
+  * remove include
+  * remove version_gte from package.xml
+  * updated the setup assitant to work with trajopt planner
+  * removed unsuded part in initialize() from trajopt_planner_manager.cpp, kept the initialize() itself for later use
+  * Update moveit_planners/trajopt/src/trajopt_planner_manager.cpp
+  Co-Authored-By: Dave Coleman <dave@picknik.ai>
+  * added README
+  added description to trajopt_interface_plugin_description.xml
+  * updated resp req
+  updated planning context
+  working trajopt without any velocity constraint
+  * added trajopt_interface class
+  * changed the architectrue and used TrajoptInterface class to contain the solve function details. Created a TrajOptInterface object in TrajoptPlanningContext class instead
+  * added kinematic_terms
+  in problem_description, added comments anout term_type
+  added ProblemInfo, TermInfo, InitInfo, BasicInfo
+  in kinematic_terms, added  operator()
+  added ConstructProblem
+  added some param for problem_info
+  * moved rotVec and concat from kinematics_term header to implementation
+  in problem_Description, added term_type
+  used MotionPlaneRequest from planning_interface instead that of moveit_msgs for solve function input
+  added generateInitiaTrajectory
+  added basic_info to problem_info
+  * added panda_omple_planning
+  added checkParameterSize function in problem_description
+  added JointPoseTermInfo::hatch in problem_description
+  added res.error.code.val to check the request in trajopt_interface.cpp
+  convert req.goal_constraint to JointPoseTermInfo in trajopt_interface.cpp
+  feed the response with the trajopt solution in trajopt_interface.cpp
+  remove comments from trajopt_planning_context.cpp
+  * addressed the comments
+  fixed start state
+  corrected the yaml file
+  multiple joint constraints
+  * addressed some comments
+  leave setup assistant changes for later on another PR
+  cleaned up test_trajopt
+  added unittest
+  * added kinematic DOF of the active joint model group to TrajOptProblem class
+  added name\_ for ROS_DEBUG_STREAM_NAMED
+  addressed the comments
+  moved launch file to moveit_tutorial
+  moved yaml file to panda_moveit_config
+  used bullet for collision checking
+  * handled reading the request from MotionPlanning Display in RViz
+  * Added comments about initial trajectory
+  changed my email address
+  renamed rotVec and concat
+  added tesseract license
+  * clang format
+  * applied Henning's comments
+  * added catkin ignore to ignore this package for now as it has dependencies. The next PR wont have any dependencies
+  * clang format
+  * addressed the comments
+  * renamed hatch to addObjectiveTerms
+  * added a unittest for goal tolerance
+  * addressed Dave's comments
+  * added catkin_ignore
+  * addressed Bryce's comments
+* fix the invalid iterator issue (`#1623 <https://github.com/JafarAbdi/moveit/issues/1623>`_)
+  Signed-off-by: Daniel Wang <daniel.wang@canonical.com>
+* Use QDir::currentPath() rather than getenv("PWD") (`#1618 <https://github.com/JafarAbdi/moveit/issues/1618>`_)
+* Fix binary artifact install locations. (`#1575 <https://github.com/JafarAbdi/moveit/issues/1575>`_)
+* Switch from include guards to pragma once (`#1615 <https://github.com/JafarAbdi/moveit/issues/1615>`_)
+* Add joint state controller config by default (`#1024 <https://github.com/JafarAbdi/moveit/issues/1024>`_)
+  Hide joint state controller option in controllers screen and improve documentation
+* Use CMAKE_CXX_STANDARD to enforce c++14 for portability (`#1607 <https://github.com/JafarAbdi/moveit/issues/1607>`_)
+  * favor CMAKE_CXX_STANDARD to enforce c++14
+  * update all cmake_minimum_required usage
+* Remove ! from MoveIt name (`#1590 <https://github.com/JafarAbdi/moveit/issues/1590>`_)
+* Use portable string() on filesystem::path. (`#1571 <https://github.com/JafarAbdi/moveit/issues/1571>`_)
+* static transform publisher does not take a rate (`#1494 <https://github.com/JafarAbdi/moveit/issues/1494>`_)
+* Merge `#1439 <https://github.com/JafarAbdi/moveit/issues/1439>`_: Add named frames to CollisionObjects
+* PlanningAdapter to resolve constraint frames
+* Clang tidy fix `modernize-loop-convert` to entire code base (`#1419 <https://github.com/JafarAbdi/moveit/issues/1419>`_)
+* add arguments to launch file templates (`#1397 <https://github.com/JafarAbdi/moveit/issues/1397>`_)
+  * add arguments to launch file templates
+  If one has an installed moveit_config package, there should be enough
+  arguments, to use move_group.launch. Otherwise every user of the robot
+  would have to fork the robot package.
+  This commit adds some options that allow an application package to build
+  onto a robot's moveit_config:
+  * load_robot_description - if set to false, one can load a modified
+  robot model that contains e.g. additional fixed objects
+  * pipeline - allows to choose between different planning pipelines
+  (minimal version of `#1025 <https://github.com/JafarAbdi/moveit/issues/1025>`_)
+  * rviz config_file - path to config file is way more flexible than
+  defaulting to an empty setting. Especially since the
+  `save config as default` option was dropped in RViz.
+  * rename argument to rviz_config
+  * add rviz_config argument to MIGRATION.md
+  * Update MIGRATION.md
+  Co-Authored-By: jschleicher <j.schleicher@pilz.de>
+* remove obsolete moveit_resources/config.h (`#1412 <https://github.com/JafarAbdi/moveit/issues/1412>`_)
+* fixing the test utilities in moveit core (`#1409 <https://github.com/JafarAbdi/moveit/issues/1409>`_)
+  * fixing the test utilities in moveit core
+  * replacing MOVEIT_TEST_RESOURCES_DIR with getPath(moveit_resources)
+* Apply clang tidy fix to entire code base (Part 2) (`#1394 <https://github.com/JafarAbdi/moveit/issues/1394>`_)
+  * Conform class name to `CamelCase`
+  * Conform member method name to `camelBack`
+  * Exceptions to method name
+  * Conform local variable name to `lower_case` part 1
+  * Conform local variable name to `lower_case` part 2
+  * Conform local variable name to `lower_case` part 3
+  * Conform local variable name to `lower_case` part 4
+  * Local static variable to `lower_case`
+  * Local variable manual fix
+  * Exceptions to local variable name
+  * Conform static const variable name to `UPPER_CASE`
+  * Conform global variable name to `UPPER_CASE`
+  * Conform static const member variable to `UPPER_CASE`
+  * clang-format
+  * Travis: mandatory clang-tidy-check
+  * Catch up most recent changes
+  * Update .clang-tidy
+  * fixup! Conform static const variable name to `UPPER_CASE`
+* Contributors: Daniel Wang, Dave Coleman, Jafar Abdi, Jonathan Binney, Mark Moll, Michael Görner, Mike Lautman, Mohmmad Ayman, Omid Heidari, Robert Haschke, Sean Yen, Tejas Kumar Shastha, Yu, Yan, jschleicher
+
 1.0.1 (2019-03-08)
 ------------------
 * [fix] re-add required build dependencies (`#1373 <https://github.com/ros-planning/moveit/issues/1373>`_)

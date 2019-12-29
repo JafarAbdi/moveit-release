@@ -2,6 +2,25 @@
 Changelog for package chomp_interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Add Missing License (`#1779 <https://github.com/JafarAbdi/moveit/issues/1779>`_)
+* Merge `#1773 <https://github.com/JafarAbdi/moveit/issues/1773>`_: Fix compiler warnings
+* fix unused parameter warnings
+* Fix binary artifact install locations. (`#1575 <https://github.com/JafarAbdi/moveit/issues/1575>`_)
+* Switch from include guards to pragma once (`#1615 <https://github.com/JafarAbdi/moveit/issues/1615>`_)
+* Use CMAKE_CXX_STANDARD to enforce c++14 for portability (`#1607 <https://github.com/JafarAbdi/moveit/issues/1607>`_)
+  * favor CMAKE_CXX_STANDARD to enforce c++14
+  * update all cmake_minimum_required usage
+* Remove ! from MoveIt name (`#1590 <https://github.com/JafarAbdi/moveit/issues/1590>`_)
+* change API of ChompPlanner::solve() to not use message
+* fix start-state handling
+* C++11 modernize
+* small fixes to chomp planner (`#1407 <https://github.com/JafarAbdi/moveit/issues/1407>`_)
+  * rename res2 -> res_msg
+  * remove time parameterization from planning code
+* Contributors: Chittaranjan Srinivas Swaminathan, Dave Coleman, Jonathan Binney, Robert Haschke, Sean Yen
+
 1.0.1 (2019-03-08)
 ------------------
 * [improve] Apply clang tidy fix to entire code base (Part 1) (`#1366 <https://github.com/ros-planning/moveit/issues/1366>`_)

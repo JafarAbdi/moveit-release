@@ -2,6 +2,101 @@
 Changelog for package moveit_ros_planning_interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge `#1781 <https://github.com/JafarAbdi/moveit/issues/1781>`_: Fix flaky moveit_cpp test
+* Fix flaky moveit_cpp test
+  - update robot state before planning
+  - release tf_listener\_ and tf_buffer\_ in correct order
+  - publish virtual joint
+* Merge `#1773 <https://github.com/JafarAbdi/moveit/issues/1773>`_: Fix compiler warnings
+* MoveItCpp: correctly initialize tf_buffer\_
+* fix unused parameter warnings
+* disable flaky moveit_cpp_test (`#1782 <https://github.com/JafarAbdi/moveit/issues/1782>`_)
+* Merge `#1656 <https://github.com/JafarAbdi/moveit/issues/1656>`_: Implement low-level interface moveit_cpp
+* Fix warnings + improve readability in MoveItCpp
+* Initial unit tests for MoveItCpp (`#4 <https://github.com/JafarAbdi/moveit/issues/4>`_)
+* Initial implementation of MoveItCpp
+* Updating deprecation method (`#1748 <https://github.com/JafarAbdi/moveit/issues/1748>`_)
+  * replaced MOVEIT_DEPRECATED with [[deprecated]]
+  * issuing a warning when including deprecation.h
+* eigenpy: changed to system package (`#1737 <https://github.com/JafarAbdi/moveit/issues/1737>`_)
+* Improve move_group_interface's const correctness (`#1715 <https://github.com/JafarAbdi/moveit/issues/1715>`_)
+  * Add const qualifier to all the member functions which do not modify the state of the class.
+  * Added noexcept modifiers to move constructors, which should always be marked as noexcept.
+* Use `.pyd` as the output suffix for Python module on Windows. (`#1637 <https://github.com/JafarAbdi/moveit/issues/1637>`_)
+  There is no other standard way to mark this in cmake
+* favor ros::Duration.sleep over sleep. (`#1634 <https://github.com/JafarAbdi/moveit/issues/1634>`_)
+* Add parameter to get_jacobian_matrix (`#1595 <https://github.com/JafarAbdi/moveit/issues/1595>`_)
+  * Add parameter to getJacobian Python interface
+  * Add changes
+  * Overload wrapper
+  * Add test for reference_point_position
+  * cleanup
+* Fix binary artifact install locations. (`#1575 <https://github.com/JafarAbdi/moveit/issues/1575>`_)
+* Switch from include guards to pragma once (`#1615 <https://github.com/JafarAbdi/moveit/issues/1615>`_)
+* PSI: wait for its two services
+  They constitute the main functionality of the class, so it makes sense to wait.
+* PSI: use LOGNAME
+* Use CMAKE_CXX_STANDARD to enforce c++14 for portability (`#1607 <https://github.com/JafarAbdi/moveit/issues/1607>`_)
+  * favor CMAKE_CXX_STANDARD to enforce c++14
+  * update all cmake_minimum_required usage
+* Remove ! from MoveIt name (`#1590 <https://github.com/JafarAbdi/moveit/issues/1590>`_)
+* clang-tidy fixup (`#1586 <https://github.com/JafarAbdi/moveit/issues/1586>`_)
+* Select time parametrization algorithm in retime_trajectory (`#1508 <https://github.com/JafarAbdi/moveit/issues/1508>`_)
+  * Python wrapper: add acceleration_scaling_factor argument to retime_trajectory.
+  * wrap_python_move_group.cpp, move_group.py: add algorithm option to retime_trajectory in pyhon interface of move_group.
+  * moveit_commander: add python_time_parameterization test.
+* drop redundant namespace specification moveit::planning_interface::
+* MGI: Expose constructPickGoal and constructPlaceGoal (`#1498 <https://github.com/JafarAbdi/moveit/issues/1498>`_)
+* Add get_jacobian_matrix to moveit_commander (`#1501 <https://github.com/JafarAbdi/moveit/issues/1501>`_)
+* Merge `#1439 <https://github.com/JafarAbdi/moveit/issues/1439>`_: Add named frames to CollisionObjects
+* Streamline getFrameTransform, add getFrameInfo to RobotState
+  The getFrameInfo function is needed later for validateConstraintFrames. The getFrameTransform functions with "frame_found" parameter allow skipping the redundant searches in the planning_scene that are also part of this commit.
+* un-depreacate MoveGroupInterface::setJointValueTarget(RobotState)
+  Remove warning added by c6e8df9c3c.
+  MoveGroupInterface::setJointValueTarget(RobotState) is used, for example, by rviz plugin.
+* [Python wrapper] Added custom time limit for wait_for_servers in MoveGroupInterface (`#1444 <https://github.com/JafarAbdi/moveit/issues/1444>`_)
+  * Added custom time limit for wait_for_servers
+  * Retained current hardcoded 5 second limit
+  * Used double to conform to python accessible API instead of `ros::WallDuration(int, int)`
+  * API is extended, remains conformant to previous releases
+  * Ran clang-format on a webedit
+* Clang tidy fix `modernize-loop-convert` to entire code base (`#1419 <https://github.com/JafarAbdi/moveit/issues/1419>`_)
+* Removed unnecessary null pointer checks on deletion (`#1410 <https://github.com/JafarAbdi/moveit/issues/1410>`_)
+* improve [get|set]JointValueTarget in python wrapper (`#858 <https://github.com/JafarAbdi/moveit/issues/858>`_)
+  * fix getJointValueTarget()
+  return a variable values matching to setJointValueTarget()
+  * deprecate public getJointValueTarget() in favour of protected getTargetRobotState()
+  * rename impl's getJointStateTarget() -> getTargetRobotState()
+  * deprecating dangerous setJointValueTarget() functions
+  allowing to set joint values for non-group joints is not a good idea
+  * sanity checks for joint setters: don't allow non-group joints
+  * Undeprecate setJointValueTarget(sensor_msgs::JointState)
+  * undeprecate setJointValueTarget(), remove python's MoveGroupInterface.set_state_value_target()
+* moveit_commander.MoveGroupInterface.plan() to better align with C++ MoveGroup::plan() (`#790 <https://github.com/JafarAbdi/moveit/issues/790>`_)
+  * MoveGroupCommander.plan() now returns [success, trajectory, planning_time, error_code]
+* Apply clang tidy fix to entire code base (Part 2) (`#1394 <https://github.com/JafarAbdi/moveit/issues/1394>`_)
+  * Conform class name to `CamelCase`
+  * Conform member method name to `camelBack`
+  * Exceptions to method name
+  * Conform local variable name to `lower_case` part 1
+  * Conform local variable name to `lower_case` part 2
+  * Conform local variable name to `lower_case` part 3
+  * Conform local variable name to `lower_case` part 4
+  * Local static variable to `lower_case`
+  * Local variable manual fix
+  * Exceptions to local variable name
+  * Conform static const variable name to `UPPER_CASE`
+  * Conform global variable name to `UPPER_CASE`
+  * Conform static const member variable to `UPPER_CASE`
+  * clang-format
+  * Travis: mandatory clang-tidy-check
+  * Catch up most recent changes
+  * Update .clang-tidy
+  * fixup! Conform static const variable name to `UPPER_CASE`
+* Contributors: Bence Magyar, Dave Coleman, Felix von Drigalski, Henning Kayser, Jafar Abdi, JafarAbdi, Jere Liukkonen, Jonathan Binney, Kunal Tyagi, Mahmoud Ahmed Selim, Masaki Murooka, Michael Görner, Niklas Fiedler, Robert Haschke, Ryosuke Tajima, Sean Yen, Yu, Yan, mvieth, v4hn
+
 1.0.1 (2019-03-08)
 ------------------
 * [improve] Apply clang tidy fix to entire code base (Part 1) (`#1366 <https://github.com/ros-planning/moveit/issues/1366>`_)

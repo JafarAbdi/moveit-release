@@ -2,6 +2,45 @@
 Changelog for package moveit_commander
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* [moveit_commander] python3 import fixes (`#1786 <https://github.com/JafarAbdi/moveit/issues/1786>`_)
+  - force relative import
+  - try to import StringIO from StringIO module first, then from io module
+* Handle the updated plan() function of MoveGroupCommander (`#1640 <https://github.com/JafarAbdi/moveit/issues/1640>`_)
+* fallback to using pyreadline for Window. (`#1635 <https://github.com/JafarAbdi/moveit/issues/1635>`_)
+* python planning_scene_interface: fix attaching objects (`#1624 <https://github.com/JafarAbdi/moveit/issues/1624>`_)
+* Add parameter to get_jacobian_matrix (`#1595 <https://github.com/JafarAbdi/moveit/issues/1595>`_)
+  * Add parameter to getJacobian Python interface
+  * Add changes
+  * Overload wrapper
+  * Add test for reference_point_position
+  * cleanup
+* Use CMAKE_CXX_STANDARD to enforce c++14 for portability (`#1607 <https://github.com/JafarAbdi/moveit/issues/1607>`_)
+  * favor CMAKE_CXX_STANDARD to enforce c++14
+  * update all cmake_minimum_required usage
+* Remove ! from MoveIt name (`#1590 <https://github.com/JafarAbdi/moveit/issues/1590>`_)
+* Select time parametrization algorithm in retime_trajectory (`#1508 <https://github.com/JafarAbdi/moveit/issues/1508>`_)
+  * Python wrapper: add acceleration_scaling_factor argument to retime_trajectory.
+  * wrap_python_move_group.cpp, move_group.py: add algorithm option to retime_trajectory in pyhon interface of move_group.
+  * moveit_commander: add python_time_parameterization test.
+* Add get_jacobian_matrix to moveit_commander (`#1501 <https://github.com/JafarAbdi/moveit/issues/1501>`_)
+* fix moveit_commander (`#1459 <https://github.com/JafarAbdi/moveit/issues/1459>`_)
+  d649771a65 introduced the wrong exception to handle in go(). Catch TypeError (of joints variable having the wrong type). A MoveItCommanderException should be propagated up the stack.
+* cleanup python PlanningSceneInterface (`#1405 <https://github.com/JafarAbdi/moveit/issues/1405>`_)
+  * CollisionObject in remove_world_object requires attach=False
+  * use __submit() for add_cylinder
+* moveit_commander.MoveGroupInterface.plan() to better align with C++ MoveGroup::plan() (`#790 <https://github.com/JafarAbdi/moveit/issues/790>`_)
+  * MoveGroupCommander.plan() now returns [success, trajectory, planning_time, error_code]
+* Moveit commander planning scene interface fixup (`#789 <https://github.com/JafarAbdi/moveit/issues/789>`_)
+  * Make hidden _\_ methods static and move to end
+  * Remove unused import
+  * Use the apply_planning_scene service to add objects
+  * "X != None" --> "X is not None"
+  * Add arguments asynchronous and service_timeout
+  * Fix PEP style warning (except for line length)
+* Contributors: Bence Magyar, Bjar Ne, Dave Coleman, Felix von Drigalski, Jafar Abdi, Masaki Murooka, Raphael Druon, Robert Haschke, Ryosuke Tajima, Sean Yen
+
 1.0.1 (2019-03-08)
 ------------------
 * [capability] python PlanningSceneInterface.add_cylinder() (`#1372 <https://github.com/ros-planning/moveit/issues/1372>`_)

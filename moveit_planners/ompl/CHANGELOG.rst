@@ -2,6 +2,108 @@
 Changelog for package moveit_planners_ompl
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* clear roadmap validity for LazyPRM/LazyPRMstar when using multi-query planning is enabled (`#1802 <https://github.com/JafarAbdi/moveit/issues/1802>`_)
+  * clear roadmap validity for LazyPRM/LazyPRMstar when using multi-query planning is enabled
+  * add #if guard for OMPL version
+* Add support for multi-query planning in OMPL (`#1799 <https://github.com/JafarAbdi/moveit/issues/1799>`_)
+  If enabled, the internal state of of planners does not get cleared.
+  This can be enabled per planner. It only makes sense for roadmap-based
+  planners (or if the start state does not change). Additionally, for
+  PRM, PRM*, LazyPRM, and LazyPRM* it is possible (when using OMPL 1.5.0)
+  to load/save roadmaps from disk upon creation/destruction. This is
+  set in ompl_planning.yaml like so:
+  planner_configs:
+  PersistentPRM:
+  type: geometric::PRM
+  multi_query_planning_enabled: true
+  store_planner_data: true
+  load_planner_data: true
+  planner_data_path: /tmp/roadmap.graph
+  This commit also fixes a bug for PRM-family planners where they would
+  always run as optimizing planners and not terminate when the first
+  solution was found. This occurs when the default optimization objective
+  is set when none are specified. The fix is to not set an objective
+  when none are specified.
+  Co-Authored-By: Robert Haschke <rhaschke@users.noreply.github.com>
+* Merge `#1773 <https://github.com/JafarAbdi/moveit/issues/1773>`_: Fix compiler warnings
+* fix unused parameter warnings
+* Fix infinite recursive call to loadConstraintApproximations (`#1768 <https://github.com/JafarAbdi/moveit/issues/1768>`_)
+  Fixup for `#1428 <https://github.com/JafarAbdi/moveit/issues/1428>`_.
+* Allow user to specify planner termination condition. (`#1695 <https://github.com/JafarAbdi/moveit/issues/1695>`_)
+  * Add OMPL planner 'AnytimePathShortening'
+  * clean up registration of planner allocators
+  * add parameter to geometric::AnytimePathShortening method to set planner instances and their parameters via config file
+  * clang-format
+  * add support for specifying planner termination conditions via ompl_planning.yaml file
+  * add OMPL version check to make new feature backwards compatible with older versions of MoveIt
+  * fix catkin_lint warning
+  * fix compiler warning
+  * fix logical error (ROS_ERROR is not fatal)
+  * add docs for setting termination condition
+  * add note to remove #if guard for OMPL version once support for Melodic and older has been dropped
+  * correct/add TODOs for OMPL version checks
+* Constraints Library Refactor (`#1428 <https://github.com/JafarAbdi/moveit/issues/1428>`_)
+  * Moved constraints library internal to the ModelBasedPlanningContext
+  In preparation to a larger change that moves much of the context initialization
+  internal to the ModelBasedPlanningContext as well.
+  * Removed unused OMPLPlannerService.
+  * Fixed tests since ModelBasedStateSpace is now virtual
+  * Corrected switched comments
+  * Fixed compile issues, and got construct database to work.
+  Also added launch file for ease of use.
+  * Only install the generate state db script to CATKIN_PACKAGE_BIN_DEST
+* Add OMPL planner 'AnytimePathShortening' (`#1686 <https://github.com/JafarAbdi/moveit/issues/1686>`_)
+  * Add OMPL planner 'AnytimePathShortening'
+  * clean up registration of planner allocators
+  * add parameter to geometric::AnytimePathShortening method to set planner instances and their parameters via config file
+  * clang-format
+  * make anytime path planning backwards compatible
+* Cleanup OMPL dynamic reconfigure config (`#1649 <https://github.com/JafarAbdi/moveit/issues/1649>`_)
+  * reduce minimum number of waypoints in solution to 2
+  There is no real reason to specify 10 here by default.
+  So instead, allow for the bare minimum of waypoints if simple interpolation
+  from start to end succeeds and the maximum segment length suffices.
+  Fixes `#19 <https://github.com/JafarAbdi/moveit/issues/19>`_.
+  * ompl dyn reconfig: clean wrongly specified levels
+  The levels are treated as bitmasks in the reconfigure callback,
+  so counting up in natural numbers does not serve any purpose.
+  The respective callback ignores the values either way,
+  so this change just simplifies reading the config.
+* move isEmpty test functions to moveit_core/utils (`#1627 <https://github.com/JafarAbdi/moveit/issues/1627>`_)
+* Fix binary artifact install locations. (`#1575 <https://github.com/JafarAbdi/moveit/issues/1575>`_)
+* Switch from include guards to pragma once (`#1615 <https://github.com/JafarAbdi/moveit/issues/1615>`_)
+* Use CMAKE_CXX_STANDARD to enforce c++14 for portability (`#1607 <https://github.com/JafarAbdi/moveit/issues/1607>`_)
+  * favor CMAKE_CXX_STANDARD to enforce c++14
+  * update all cmake_minimum_required usage
+* Remove ! from MoveIt name (`#1590 <https://github.com/JafarAbdi/moveit/issues/1590>`_)
+* Clang tidy fix `modernize-loop-convert` to entire code base (`#1419 <https://github.com/JafarAbdi/moveit/issues/1419>`_)
+* remove obsolete moveit_resources/config.h (`#1412 <https://github.com/JafarAbdi/moveit/issues/1412>`_)
+* fixing the test utilities in moveit core (`#1409 <https://github.com/JafarAbdi/moveit/issues/1409>`_)
+  * fixing the test utilities in moveit core
+  * replacing MOVEIT_TEST_RESOURCES_DIR with getPath(moveit_resources)
+* Apply clang tidy fix to entire code base (Part 2) (`#1394 <https://github.com/JafarAbdi/moveit/issues/1394>`_)
+  * Conform class name to `CamelCase`
+  * Conform member method name to `camelBack`
+  * Exceptions to method name
+  * Conform local variable name to `lower_case` part 1
+  * Conform local variable name to `lower_case` part 2
+  * Conform local variable name to `lower_case` part 3
+  * Conform local variable name to `lower_case` part 4
+  * Local static variable to `lower_case`
+  * Local variable manual fix
+  * Exceptions to local variable name
+  * Conform static const variable name to `UPPER_CASE`
+  * Conform global variable name to `UPPER_CASE`
+  * Conform static const member variable to `UPPER_CASE`
+  * clang-format
+  * Travis: mandatory clang-tidy-check
+  * Catch up most recent changes
+  * Update .clang-tidy
+  * fixup! Conform static const variable name to `UPPER_CASE`
+* Contributors: Bryce Willey, Dave Coleman, Jonathan Binney, Mark Moll, Michael Görner, Mike Lautman, Robert Haschke, Sean Yen, Yu, Yan
+
 1.0.1 (2019-03-08)
 ------------------
 * [improve] Apply clang tidy fix to entire code base (Part 1) (`#1366 <https://github.com/ros-planning/moveit/issues/1366>`_)

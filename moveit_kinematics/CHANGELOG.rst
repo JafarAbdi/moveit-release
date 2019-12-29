@@ -2,6 +2,56 @@
 Changelog for package moveit_kinematics
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge `#1773 <https://github.com/JafarAbdi/moveit/issues/1773>`_: Fix compiler warnings
+* fix -Woverloaded-virtual warnings
+  Due to a different order of arguments, there was an extra layer of function forwarding for searchPositionIK.
+* fix unused parameter warnings
+* delete IKCache copy constructor (`#1750 <https://github.com/JafarAbdi/moveit/issues/1750>`_)
+  It never existed, because the class contains a mutex object (not copyable).
+  clang complained about this discrepancy.
+* optional prefix for link names in ikfast plugin (`#1599 <https://github.com/JafarAbdi/moveit/issues/1599>`_)
+  If you pass a `link_prefix` parameter in your `kinematics.yaml`, this string is prepended to the base and tip links. It allows multi-robot setups (e.g. dual-arm) and still instantiate the same solver for both manipulators.
+* Fix binary artifact install locations. (`#1575 <https://github.com/JafarAbdi/moveit/issues/1575>`_)
+* Switch from include guards to pragma once (`#1615 <https://github.com/JafarAbdi/moveit/issues/1615>`_)
+* Use CMAKE_CXX_STANDARD to enforce c++14 for portability (`#1607 <https://github.com/JafarAbdi/moveit/issues/1607>`_)
+  * favor CMAKE_CXX_STANDARD to enforce c++14
+  * update all cmake_minimum_required usage
+* Remove ! from MoveIt name (`#1590 <https://github.com/JafarAbdi/moveit/issues/1590>`_)
+* Relax dependencies of moveit_kinematics (`#1529 <https://github.com/JafarAbdi/moveit/issues/1529>`_)
+  * relax dependencies of moveit_kinematics
+  * renamed measure_ik_call_cost to benchmark_ik
+* KDL IK solver: fix handling of mimic joints (`#1490 <https://github.com/JafarAbdi/moveit/issues/1490>`_)
+  - correctly count mimic joints
+  - don't resize extra_joint_weights vector
+  Fixes an issue introduced in 5bedb7a31db8ab4ac7e474de762e5dfc42ad4d13.
+* ikfast: fix ROS apt-key in OpenRAVE docker image (`#1503 <https://github.com/JafarAbdi/moveit/issues/1503>`_)
+* Fix ikfast plugin-generator script (`#1492 <https://github.com/JafarAbdi/moveit/issues/1492>`_)
+* IKFast: increase verbosity of generated script (`#1434 <https://github.com/JafarAbdi/moveit/issues/1434>`_)
+* IKFastPlugin: fix initialization of RobotState (`#1449 <https://github.com/JafarAbdi/moveit/issues/1449>`_)
+* Clang tidy fix `modernize-loop-convert` to entire code base (`#1419 <https://github.com/JafarAbdi/moveit/issues/1419>`_)
+* Apply clang tidy fix to entire code base (Part 2) (`#1394 <https://github.com/JafarAbdi/moveit/issues/1394>`_)
+  * Conform class name to `CamelCase`
+  * Conform member method name to `camelBack`
+  * Exceptions to method name
+  * Conform local variable name to `lower_case` part 1
+  * Conform local variable name to `lower_case` part 2
+  * Conform local variable name to `lower_case` part 3
+  * Conform local variable name to `lower_case` part 4
+  * Local static variable to `lower_case`
+  * Local variable manual fix
+  * Exceptions to local variable name
+  * Conform static const variable name to `UPPER_CASE`
+  * Conform global variable name to `UPPER_CASE`
+  * Conform static const member variable to `UPPER_CASE`
+  * clang-format
+  * Travis: mandatory clang-tidy-check
+  * Catch up most recent changes
+  * Update .clang-tidy
+  * fixup! Conform static const variable name to `UPPER_CASE`
+* Contributors: Christian Henkel, Dave Coleman, Immanuel Martini, Jonathan Binney, Michael Görner, Robert Haschke, Sean Yen, Yu, Yan, jschleicher
+
 1.0.1 (2019-03-08)
 ------------------
 * [improve] Apply clang tidy fix to entire code base (Part 1) (`#1366 <https://github.com/ros-planning/moveit/issues/1366>`_)

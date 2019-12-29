@@ -2,6 +2,81 @@
 Changelog for package moveit_ros_visualization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* rviz plugin: Joints tab (`#1308 <https://github.com/JafarAbdi/moveit/issues/1308>`_)
+* Merge `#1773 <https://github.com/JafarAbdi/moveit/issues/1773>`_: Fix compiler warnings
+* fix clang-tidy issues
+* remove unused include
+* silent warnings outside MoveIt code base
+* fix unused parameter warnings
+* rviz panel: pass <current> start state as empty to move_group (`#1772 <https://github.com/JafarAbdi/moveit/issues/1772>`_)
+  ... to ensure that the most recent current state is actually used for planning
+* Show attached bodies trail in RViz (`#1766 <https://github.com/JafarAbdi/moveit/issues/1766>`_)
+* Add "<previous>" robot state to RViz motion panel (`#1742 <https://github.com/JafarAbdi/moveit/issues/1742>`_)
+* Fixup `#1625 <https://github.com/JafarAbdi/moveit/issues/1625>`_: MSA needs to explicitly call setVisible(true) (`#1738 <https://github.com/JafarAbdi/moveit/issues/1738>`_)
+  ... to actually show the robot of the RobotStateDisplay (which is hidden initially since `#1625 <https://github.com/JafarAbdi/moveit/issues/1625>`_).
+  Fixes b0f01b2dc79f99f5650933834c8e50905bdbe168.
+* fixed REALTIME planned path trajectory playback (`#1683 <https://github.com/JafarAbdi/moveit/issues/1683>`_)
+* Unified Collision Environment Integration (`#1584 <https://github.com/JafarAbdi/moveit/issues/1584>`_)
+  * Unified collision environment
+  * Integrating FCL unified environment into the planning scene
+  * Distance field collision environment
+  * Collision distance field and hybrid compiles
+  * PR review:
+  * collision environmnet test cases adapted
+  * allocating of child planning scenes
+  * valided padding and scaling added
+  * reordering of member variables and functions
+  * license adaptions
+  * Unified all_valid collision detector
+  * Replace references to CollisionWorld / CollisionRobot to new CollisionEnv
+  * SBPL planner adapted for unified collision environment
+  * PR review:
+  * added as author
+  * added documentation to collision environments
+  * Added change description to migration notes.
+  * Replaced getCollisionWorld/Robot with getCollisionEnv functions
+  * PR review:
+  * change to pragma once include guards
+  * enable test
+* move isEmpty test functions to moveit_core/utils (`#1627 <https://github.com/JafarAbdi/moveit/issues/1627>`_)
+* Merge `#1625 <https://github.com/JafarAbdi/moveit/issues/1625>`_: Handle hiding of RobotStateDisplay
+* add status to warn if RobotState display is hidden
+* display robot state: do not clutter rviz with default robot on enable
+* hide display state: sanity-check to allow for empty state input
+* newRobotStateCallback(): use new .hide member of DisplayRobotState msg to visually hide the robot
+* Fix binary artifact install locations. (`#1575 <https://github.com/JafarAbdi/moveit/issues/1575>`_)
+* Switch from include guards to pragma once (`#1615 <https://github.com/JafarAbdi/moveit/issues/1615>`_)
+* Use CMAKE_CXX_STANDARD to enforce c++14 for portability (`#1607 <https://github.com/JafarAbdi/moveit/issues/1607>`_)
+  * favor CMAKE_CXX_STANDARD to enforce c++14
+  * update all cmake_minimum_required usage
+* Remove ! from MoveIt name (`#1590 <https://github.com/JafarAbdi/moveit/issues/1590>`_)
+* Merge `#1439 <https://github.com/JafarAbdi/moveit/issues/1439>`_: Add named frames to CollisionObjects
+* Add subframes to RobotState and AttachedBody
+* Clang tidy fix `modernize-loop-convert` to entire code base (`#1419 <https://github.com/JafarAbdi/moveit/issues/1419>`_)
+* Removed unnecessary null pointer checks on deletion (`#1410 <https://github.com/JafarAbdi/moveit/issues/1410>`_)
+* Apply clang tidy fix to entire code base (Part 2) (`#1394 <https://github.com/JafarAbdi/moveit/issues/1394>`_)
+  * Conform class name to `CamelCase`
+  * Conform member method name to `camelBack`
+  * Exceptions to method name
+  * Conform local variable name to `lower_case` part 1
+  * Conform local variable name to `lower_case` part 2
+  * Conform local variable name to `lower_case` part 3
+  * Conform local variable name to `lower_case` part 4
+  * Local static variable to `lower_case`
+  * Local variable manual fix
+  * Exceptions to local variable name
+  * Conform static const variable name to `UPPER_CASE`
+  * Conform global variable name to `UPPER_CASE`
+  * Conform static const member variable to `UPPER_CASE`
+  * clang-format
+  * Travis: mandatory clang-tidy-check
+  * Catch up most recent changes
+  * Update .clang-tidy
+  * fixup! Conform static const variable name to `UPPER_CASE`
+* Contributors: Dave Coleman, Felix von Drigalski, Jafar Abdi, Jens P, Jonathan Binney, Mahmoud Ahmed Selim, MarqRazz, Michael Görner, Robert Haschke, Sean Yen, Takara Kasai, Yannick Jonetzko, Yu, Yan, v4hn
+
 1.0.1 (2019-03-08)
 ------------------
 * [improve] Apply clang tidy fix to entire code base (Part 1) (`#1366 <https://github.com/ros-planning/moveit/issues/1366>`_)

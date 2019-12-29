@@ -2,6 +2,87 @@
 Changelog for package chomp_motion_planner
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge `#1773 <https://github.com/JafarAbdi/moveit/issues/1773>`_: Fix compiler warnings
+* fix unused parameter warnings
+* chomp: fix potential calculation (`#1651 <https://github.com/JafarAbdi/moveit/issues/1651>`_)
+* [windows] some more header inclusion and MSVC build error fixes. (`#1636 <https://github.com/JafarAbdi/moveit/issues/1636>`_)
+  * Fix header inclusion for Windows build.
+  * replace random() with c++11 <random> usage.
+* Unified Collision Environment Integration (`#1584 <https://github.com/JafarAbdi/moveit/issues/1584>`_)
+  * Unified collision environment
+  * Integrating FCL unified environment into the planning scene
+  * Distance field collision environment
+  * Collision distance field and hybrid compiles
+  * PR review:
+  * collision environmnet test cases adapted
+  * allocating of child planning scenes
+  * valided padding and scaling added
+  * reordering of member variables and functions
+  * license adaptions
+  * Unified all_valid collision detector
+  * Replace references to CollisionWorld / CollisionRobot to new CollisionEnv
+  * SBPL planner adapted for unified collision environment
+  * PR review:
+  * added as author
+  * added documentation to collision environments
+  * Added change description to migration notes.
+  * Replaced getCollisionWorld/Robot with getCollisionEnv functions
+  * PR review:
+  * change to pragma once include guards
+  * enable test
+* remove GCC extension and alternative operator usage. (`#1583 <https://github.com/JafarAbdi/moveit/issues/1583>`_)
+  replace the gcc extension and alternative operator usage
+  Also guard use of Linux-specific abi header
+* Fix binary artifact install locations. (`#1575 <https://github.com/JafarAbdi/moveit/issues/1575>`_)
+* Switch from include guards to pragma once (`#1615 <https://github.com/JafarAbdi/moveit/issues/1615>`_)
+* Use CMAKE_CXX_STANDARD to enforce c++14 for portability (`#1607 <https://github.com/JafarAbdi/moveit/issues/1607>`_)
+  * favor CMAKE_CXX_STANDARD to enforce c++14
+  * update all cmake_minimum_required usage
+* Remove ! from MoveIt name (`#1590 <https://github.com/JafarAbdi/moveit/issues/1590>`_)
+* Merge `#1525 <https://github.com/JafarAbdi/moveit/issues/1525>`_: Fix Chomp planning adapter
+* Apply suggestions from code review
+* Interpolate when initializing from trajectory
+* Fix log output
+  When returning with initialized trajectory, it was always logging "using path from iteration -1".
+* Fix ChompTrajectory initialization from trajectory
+* change API of ChompPlanner::solve() to not use message
+* fix start-state handling
+* ChompTrajectory: use size_t whereever applicable
+* remove ChompTrajectory(trajectory_msg)
+  This constructor was unused and has several design issues:
+  What if the passed trajectory has less than 2/3 waypoints?
+* ChompTrajectory cleanup
+  - reduce code duplication
+  - cleanup: avoid loops, utilize Eigen functions
+* C++11 modernize
+* reduce verboseness
+* Clang tidy fix `modernize-loop-convert` to entire code base (`#1419 <https://github.com/JafarAbdi/moveit/issues/1419>`_)
+* small fixes to chomp planner (`#1407 <https://github.com/JafarAbdi/moveit/issues/1407>`_)
+  * rename res2 -> res_msg
+  * remove time parameterization from planning code
+* Apply clang tidy fix to entire code base (Part 2) (`#1394 <https://github.com/JafarAbdi/moveit/issues/1394>`_)
+  * Conform class name to `CamelCase`
+  * Conform member method name to `camelBack`
+  * Exceptions to method name
+  * Conform local variable name to `lower_case` part 1
+  * Conform local variable name to `lower_case` part 2
+  * Conform local variable name to `lower_case` part 3
+  * Conform local variable name to `lower_case` part 4
+  * Local static variable to `lower_case`
+  * Local variable manual fix
+  * Exceptions to local variable name
+  * Conform static const variable name to `UPPER_CASE`
+  * Conform global variable name to `UPPER_CASE`
+  * Conform static const member variable to `UPPER_CASE`
+  * clang-format
+  * Travis: mandatory clang-tidy-check
+  * Catch up most recent changes
+  * Update .clang-tidy
+  * fixup! Conform static const variable name to `UPPER_CASE`
+* Contributors: Bence Magyar, Dave Coleman, Jens P, Jonathan Binney, Robert Haschke, Sean Yen, Yu, Yan
+
 1.0.1 (2019-03-08)
 ------------------
 * [improve] Apply clang tidy fix to entire code base (Part 1) (`#1366 <https://github.com/ros-planning/moveit/issues/1366>`_)
