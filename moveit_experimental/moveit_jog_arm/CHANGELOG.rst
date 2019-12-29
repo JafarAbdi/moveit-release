@@ -2,8 +2,8 @@
 Changelog for package moveit_jog_arm
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.1.0 (2019-12-29)
+------------------
 * Fix versioning
 * moveit_jog_arm: Get transforms from RobotState instead of TF (`#1803 <https://github.com/JafarAbdi/moveit/issues/1803>`_)
 * jog_arm: add a C++ API (`#1763 <https://github.com/JafarAbdi/moveit/issues/1763>`_)

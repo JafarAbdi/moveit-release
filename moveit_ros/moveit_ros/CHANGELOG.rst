@@ -2,8 +2,8 @@
 Changelog for package moveit_ros
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.1.0 (2019-12-29)
+------------------
 * Use standard cmake text for metapackages (`#1620 <https://github.com/JafarAbdi/moveit/issues/1620>`_)
 * Use CMAKE_CXX_STANDARD to enforce c++14 for portability (`#1607 <https://github.com/JafarAbdi/moveit/issues/1607>`_)
   * favor CMAKE_CXX_STANDARD to enforce c++14

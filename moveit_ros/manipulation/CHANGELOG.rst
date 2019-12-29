@@ -2,8 +2,8 @@
 Changelog for package moveit_ros_manipulation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.1.0 (2019-12-29)
+------------------
 * Merge `#1773 <https://github.com/JafarAbdi/moveit/issues/1773>`_: Fix compiler warnings
 * fix unused parameter warnings
 * move isEmpty test functions to moveit_core/utils (`#1627 <https://github.com/JafarAbdi/moveit/issues/1627>`_)

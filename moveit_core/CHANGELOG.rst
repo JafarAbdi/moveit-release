@@ -2,8 +2,8 @@
 Changelog for package moveit_core
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.1.0 (2019-12-29)
+------------------
 * deepcopy option for RobotTrajectory's copy constructor (`#1760 <https://github.com/JafarAbdi/moveit/issues/1760>`_)
 * Merge `#1781 <https://github.com/JafarAbdi/moveit/issues/1781>`_: Fix flaky moveit_cpp test
 * Handle incomplete group states

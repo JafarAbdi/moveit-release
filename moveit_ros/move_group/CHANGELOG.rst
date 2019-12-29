@@ -2,8 +2,8 @@
 Changelog for package moveit_ros_move_group
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.1.0 (2019-12-29)
+------------------
 * TfPublisher: fixup and add attached collsion objects (`#1792 <https://github.com/JafarAbdi/moveit/issues/1792>`_)
   * fixed transform timestamp
   * The move_group TfPublisher capability now also publishes attached collision objects and their subframes to the tf system

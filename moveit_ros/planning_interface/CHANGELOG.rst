@@ -2,8 +2,8 @@
 Changelog for package moveit_ros_planning_interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.1.0 (2019-12-29)
+------------------
 * Merge `#1781 <https://github.com/JafarAbdi/moveit/issues/1781>`_: Fix flaky moveit_cpp test
 * Fix flaky moveit_cpp test
   - update robot state before planning

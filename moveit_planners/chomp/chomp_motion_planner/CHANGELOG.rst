@@ -2,8 +2,8 @@
 Changelog for package chomp_motion_planner
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.1.0 (2019-12-29)
+------------------
 * Merge `#1773 <https://github.com/JafarAbdi/moveit/issues/1773>`_: Fix compiler warnings
 * fix unused parameter warnings
 * chomp: fix potential calculation (`#1651 <https://github.com/JafarAbdi/moveit/issues/1651>`_)

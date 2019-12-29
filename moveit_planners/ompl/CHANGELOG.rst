@@ -2,8 +2,8 @@
 Changelog for package moveit_planners_ompl
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.1.0 (2019-12-29)
+------------------
 * clear roadmap validity for LazyPRM/LazyPRMstar when using multi-query planning is enabled (`#1802 <https://github.com/JafarAbdi/moveit/issues/1802>`_)
   * clear roadmap validity for LazyPRM/LazyPRMstar when using multi-query planning is enabled
   * add #if guard for OMPL version

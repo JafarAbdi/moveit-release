@@ -2,8 +2,8 @@
 Changelog for package chomp_interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.1.0 (2019-12-29)
+------------------
 * Add Missing License (`#1779 <https://github.com/JafarAbdi/moveit/issues/1779>`_)
 * Merge `#1773 <https://github.com/JafarAbdi/moveit/issues/1773>`_: Fix compiler warnings
 * fix unused parameter warnings

@@ -2,8 +2,8 @@
 Changelog for package moveit_ros_occupancy_map_monitor
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.1.0 (2019-12-29)
+------------------
 * Merge `#1773 <https://github.com/JafarAbdi/moveit/issues/1773>`_: Fix compiler warnings
 * silent warnings outside MoveIt code base
 * [windows] some more header inclusion and MSVC build error fixes. (`#1636 <https://github.com/JafarAbdi/moveit/issues/1636>`_)

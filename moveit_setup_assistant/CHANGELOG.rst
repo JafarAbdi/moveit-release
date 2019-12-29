@@ -2,8 +2,8 @@
 Changelog for package moveit_setup_assistant
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.1.0 (2019-12-29)
+------------------
 * Fix Rviz argument in demo_gazebo.launch (`#1797 <https://github.com/JafarAbdi/moveit/issues/1797>`_)
   * rename config -> rviz_config
   * replace boolean value with file location

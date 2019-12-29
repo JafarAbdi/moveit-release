@@ -2,8 +2,8 @@
 Changelog for package moveit_fake_controller_manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.1.0 (2019-12-29)
+------------------
 * Merge `#1781 <https://github.com/JafarAbdi/moveit/issues/1781>`_: Fix flaky moveit_cpp test
 * Handle incomplete group states
   - issue a warning when building the robot model

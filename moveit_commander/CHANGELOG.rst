@@ -2,8 +2,8 @@
 Changelog for package moveit_commander
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.1.0 (2019-12-29)
+------------------
 * [moveit_commander] python3 import fixes (`#1786 <https://github.com/JafarAbdi/moveit/issues/1786>`_)
   - force relative import
   - try to import StringIO from StringIO module first, then from io module
